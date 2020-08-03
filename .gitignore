@@ -1,3 +1,10 @@
+#---- Installations
+# Install: sudo pip3 install virtualenv
+# Create: vitualenv startenv 
+# Activate: source startenv/bin/activate
+#---- end installations
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
