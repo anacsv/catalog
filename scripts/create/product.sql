@@ -1,10 +1,11 @@
 -- description
-    -- Product table that has relashionships with:
-    -- product_brand
-    -- product_condition
-    -- shipping_country
-    -- product_hating
-
+-- Table to save products, with name, description, price and gtin
+-- beyond its relationships:
+    -- product_brand (1:N)
+    -- product_condition (1:1)
+    -- shipping_country (1:1)
+    -- product_hating (1:1)
+    -- product_category (N:N)
 
 CREATE TABLE product (
     id int NOT NULL AUTO_INCREMENT,

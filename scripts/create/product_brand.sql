@@ -1,6 +1,7 @@
 -- description
---     Product brand table that has relahionship with:
---     product
+-- Table to save products brands, for example Olist.
+-- Has relahionship with:
+--     product (1:1)
 
 CREATE TABLE product_brand (
     id int NOT NULL AUTO_INCREMENT,

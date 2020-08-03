@@ -1,6 +1,8 @@
 -- description
---     Product haiting table that has relahionship with:
---     product
+-- Table to save products hating, for example if the product
+-- is good or bad, depending on its score.
+-- Has relahionship with:
+--     product (1:1)
 
 CREATE TABLE product_hating (
     id int NOT NULL AUTO_INCREMENT,

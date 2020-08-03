@@ -1,8 +1,5 @@
 -- description
---     Product product category that has relahionship with:
---     product 
---     product_category 
-
+-- Table to save product and product_category relationship (many to many)
 
 CREATE TABLE product_product_category (
     product_category_id int,

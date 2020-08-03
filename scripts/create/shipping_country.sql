@@ -1,6 +1,8 @@
 -- description
---     Product shipping country table that has relahionship with:
---     product
+-- Table to save products shipping country, for example
+-- if its national ou imported
+-- Has relahionship with:
+--     product (1:1)
 
 CREATE TABLE shipping_country (
     id int NOT NULL AUTO_INCREMENT,

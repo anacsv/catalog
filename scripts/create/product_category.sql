@@ -1,6 +1,7 @@
 -- description
---     Product category that has relahionship with:
---     product_category 
+-- Table to save products categories, for example eletronics or games
+-- Has relahionship with:
+--     product (N:N)
 
 CREATE TABLE product_category (
     id int NOT NULL AUTO_INCREMENT,
