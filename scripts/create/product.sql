@@ -1,3 +1,11 @@
+-- description
+    -- Product table that has relashionships with:
+    -- product_brand
+    -- product_condition
+    -- shipping_country
+    -- product_hating
+
+
 CREATE TABLE product (
     id int NOT NULL AUTO_INCREMENT,
     description text,

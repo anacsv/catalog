@@ -1,3 +1,9 @@
+-- description
+--     Product product category that has relahionship with:
+--     product 
+--     product_category 
+
+
 CREATE TABLE product_product_category (
     product_category_id int,
     product_id int

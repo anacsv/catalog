@@ -1,3 +1,7 @@
+-- description
+--     Product haiting table that has relahionship with:
+--     product
+
 CREATE TABLE product_hating (
     id int NOT NULL AUTO_INCREMENT,
     score int NOT NULL,
