@@ -7,7 +7,7 @@ class ProductDao(BaseDao):
         super().__init__()
 
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, description FROM {self.__table_name}'
+        sql_select = f'SELECT id, name, fullname FROM {self.__table_name}'
         if id:
             sql_select += f' WHERE id= {id} '
 
@@ -19,8 +19,7 @@ class ProductDao(BaseDao):
         obj_array = item_str.split(';')
         product.id = obj_array[0]
         product.name = obj_array[1]
-        product.description = obj_array[2]
-        product.fullname = obj_array[3]
+        product.fullname = obj_array[2]
         return product
 
 

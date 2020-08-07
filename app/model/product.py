@@ -7,7 +7,7 @@ class Product(BaseModel):
                  description: str = '', gtin='', product_condition_id=0,
                  brand_id=0, shipping_country_id=0, id: int = 0):
         self.__nome = name
-        self.__preco = price
+        self.__price = price
         self.__description = description
         self.__gtin = gtin
         self.__brand_id = brand_id
