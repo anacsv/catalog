@@ -32,7 +32,7 @@ class ProductConditionDao(BaseDao):
     def update(self, model: ProductCondition) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
-                    mail = '{model.name}'
+                    name = '{model.name}'
                     ,description = '{model.description}'
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
