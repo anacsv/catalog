@@ -1,15 +1,16 @@
 from app.model.base_model import BaseModel
 
+
 class Product(BaseModel):
 
     def __init__(self, name: str = '', price: float = 0.0,
-                description: str = '', gtin = '', product_condition_id = 0,
-                brand_id = 0, shipping_country_id = 0, id:int = 0):
+                 description: str = '', gtin='', product_condition_id=0,
+                 brand_id=0, shipping_country_id=0, id: int = 0):
         self.__nome = name
         self.__preco = price
         self.__description = description
-        self.__gtin = gtin 
-        self.__brand_id = brand_id 
+        self.__gtin = gtin
+        self.__brand_id = brand_id
         self.__product_condition_id = product_condition_id
         self.__shipping_country_id = shipping_country_id
         super().__init__(id)
@@ -51,11 +52,11 @@ class Product(BaseModel):
 
     def __dict__(self):
         return {
-                    'id':self.id,
-                    'name':self.name,
-                    'price':self.price,
-                    'gtin':self.gtin,
-                    'brand_id':self.__brand_id,
-                    'product_condition_id':self.__product_condition_id,
-                    'shipping_country_id':self.__shipping_country_id
-                }
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'gtin': self.gtin,
+            'brand_id': self.__brand_id,
+            'product_condition_id': self.__product_condition_id,
+            'shipping_country_id': self.__shipping_country_id
+        }
