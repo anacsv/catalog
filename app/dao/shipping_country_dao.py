@@ -32,8 +32,8 @@ class ShippingCountryDao(BaseDao):
     def update(self, model: ShippingCountry) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
-                    mail = '{model.name}'
-                    ,description = '{model.imported}'
+                    name = '{model.name}'
+                    , imported = '{model.imported}'
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 

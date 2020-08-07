@@ -32,8 +32,9 @@ class ProductRatingDao(BaseDao):
     def update(self, model: ProductRating) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
-                    mail = '{model.score}'
-                    ,description = '{model.status}'
+                    
+                    score = '{model.score}'
+                    , status = '{model.status}'
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 
