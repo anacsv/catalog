@@ -4,6 +4,7 @@ from app.model.product import Product
 class ProductDao(BaseDao):
 
     def __init__(self):
+        self.__table_name = 'product'
         super().__init__()
 
     def teste(self):
@@ -70,4 +71,5 @@ class ProductDao(BaseDao):
         model.id = item_tuple[0]
         model.name = item_tuple[1]
         model.description = item_tuple[2]
+        model.price = item_tuple[3]
         return model
