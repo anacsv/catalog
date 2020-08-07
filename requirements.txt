@@ -9,3 +9,11 @@ six==1.15.0
 toml==0.10.1
 typed-ast==1.4.1
 wrapt==1.12.1
+
+#---- Installations
+# Install: sudo pip3 install virtualenv
+# Create: vitualenv startenv 
+# Activate: source startenv/bin/activate
+#
+# Requirements file created with: pip freeze > requirements.txt.
+#---- end installations
