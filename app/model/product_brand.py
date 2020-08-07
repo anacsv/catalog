@@ -1,4 +1,4 @@
-from base_model import BaseModel
+from app.base_model import BaseModel
 
 class ProductBrand(BaseModel):
 

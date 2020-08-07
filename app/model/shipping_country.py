@@ -1,4 +1,3 @@
-#id, name, imported
 from app.model.base_model import BaseModel
 
 class ShippingCountry(BaseModel):

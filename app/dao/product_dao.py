@@ -1,4 +1,4 @@
-from app.dao.base_dao_sql import BaseDao
+from app.dao.base_dao import BaseDao
 from app.model.product import Product
 
 class ProductDao(BaseDao):
@@ -6,6 +6,10 @@ class ProductDao(BaseDao):
     def __init__(self):
         super().__init__()
 
+    def teste(self):
+        p = Product()
+        p.name = 'Xaomi da Ana'
+        return p.name
     # read
     def read(self, id: int = None):
         sql_select = f'SELECT id, name, description, price, gtin, product_condition_id, brand_id, shipping_country_id FROM {self.__table_name}'

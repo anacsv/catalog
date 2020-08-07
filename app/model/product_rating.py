@@ -1,4 +1,3 @@
-#id, score, status, person_id, product_id
 from app.model.base_model import BaseModel
 
 class ProductRating(BaseModel):

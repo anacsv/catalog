@@ -1,4 +1,4 @@
-from base_model import BaseModel
+from app.model.base_model import BaseModel
 
 class Product(BaseModel):
 

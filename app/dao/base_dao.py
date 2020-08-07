@@ -1,8 +1,5 @@
 import mysql.connector as connector
 
-from model.message import Message
-from model.message_type import MessageType
-
 class BaseDao:
 
     def __init__(self):

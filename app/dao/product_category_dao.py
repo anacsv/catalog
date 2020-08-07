@@ -1,4 +1,4 @@
-from app.dao.base_dao_sql import BaseDao
+from app.dao.base_dao import BaseDao
 from app.model.product_category import ProductCategory
 
 class ProductCategoryDao(BaseDao):
