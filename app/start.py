@@ -6,12 +6,17 @@ from app.dao.product_rating_dao import ProductRatingDao
 from app.dao.shipping_country_dao import ShippingCountryDao
 from app.dao.product_category_dao import ProductCategoryDao
 from app.dao.product_condition_dao import ProductConditionDao
+from app.model.product import Product
+from app.model.product_brand import ProductBrand
 from app.model.product_condition import ProductCondition
 
 app = Flask(__name__)
 
-pd = ProductDao()
-pbd = ProductBrandDao()
+p_dao = ProductDao()
+p = Product()
+p_brand_dao = ProductBrandDao()
+p_brand = ProductBrand()
+
 pr = ProductRatingDao()
 sc = ShippingCountryDao()
 p_category_dao = ProductCategoryDao()
@@ -22,13 +27,27 @@ p_condition_dao = ProductConditionDao()
 def initial():
     return ' '
 
-@app.route('/product/', methods=['GET'])
+@app.route('/product', methods=['GET'])
 def product():
-    return jsonify([prod.__dict__() for prod in pd.read()]), 200
+    return jsonify([p.__dict__() for p in p_dao.read()]), 200
 
-@app.route('/product-brand')
+@app.route('/product/', methods=['POST'])
+def product():
+    data = request.get_json()
+    product = Product(**data)
+    model = p_dao.create(product)
+    return (jsonify(model.__dict__()), 201
+
+@app.route('/product-brand', methods=['GET'])
 def product_brand():
-    return jsonify([prod_br.__dict__() for prod_br in pbd.read()]), 200
+    return jsonify([p_brand.__dict__() for p_brand in p_brand_dao.read()]), 200
+
+@app.route('/product-brand', methods=['POST'])
+def product_brand():
+    data = request.get_json()
+    product_brand = ProductBrand(**data)
+    model = p_brand_dao.create(product_brand)
+    return (jsonify(model.__dict__())), 201
 
 @app.route('/product_rating')
 def product_rating():
