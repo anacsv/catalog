@@ -72,4 +72,8 @@ class ProductDao(BaseDao):
         model.name = item_tuple[1]
         model.description = item_tuple[2]
         model.price = item_tuple[3]
+        model.gtin = item_tuple[4]
+        model.product_condition_id = item_tuple[5]
+        model.brand_id = item_tuple[6]
+        model.shipping_country_id = item_tuple[7]
         return model
