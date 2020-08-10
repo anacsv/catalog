@@ -8,10 +8,8 @@ class BaseDao:
         self.__password = 'OTE2020' 
         self.__database = 'padawans' 
         self.__get_connection()
-        
- 
+
     def __get_connection(self):
-        print('passando pelo get connect')
         self.__connection = connector.connect(
                         host = self.__hostname
                         ,user = self.__username
@@ -40,10 +38,11 @@ class BaseDao:
         return self.__read_all(sql_select)
 
     #create
-    def insert(self, sql_insert):
+    def insert(self, sql_insert) -> int:
         self.__cursor.execute(sql_insert)
         self.__connection.commit()
-        return self.__create_message('Salvo com sucesso!', 'success')
+        id = self.__cursor.lastrowid
+        return id
 
     #update
     def update(self, sql_update):
@@ -57,20 +56,3 @@ class BaseDao:
         self.__connection.commit()
         return self.__create_message('Deletado com sucesso!', 'success')
 
-
-
-
-
-    def __create_message_text_from_list(self, fields):
-        message_text = 'Faltam os seguintes campos: '
-        for field in fields:
-            message_text += f";{field}"
-        return message_text
-
-    def __create_message(self, message_text, message_type):
-        code = 1
-        msg_type = MessageType(f'Message {message_type}', message_type)
-        if type(message_text) == list:
-            message_text = self.__create_message_text_from_list(message_text)
-        message = Message(code, message_text, msg_type)
-        return message

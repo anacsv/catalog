@@ -27,7 +27,8 @@ class ProductConditionDao(BaseDao):
                         ,'{model.description}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     # update
     def update(self, model: ProductCondition) -> str:
