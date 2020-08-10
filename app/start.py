@@ -1,6 +1,5 @@
 from flask import Flask, jsonify
 
-
 from app.dao.product_brand_dao import ProductBrandDao
 from app.dao.product_dao import ProductDao
 from app.dao.product_rating_dao import ProductRatingDao
@@ -22,11 +21,11 @@ p_condition_dao = ProductConditionDao()
 def initial():
     return ' '
 
-@app.route('/product/')
+@app.route('/product')
 def product():
     return pd.read()[0].__dict__()
 
-@app.route('/product-brand/')
+@app.route('/product-brand')
 def product_brand():
     return pbd.read()[0].__dict__()
 
