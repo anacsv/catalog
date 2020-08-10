@@ -23,11 +23,11 @@ def initial():
 
 @app.route('/product')
 def product():
-    return pd.read()[0].__dict__()
+    return jsonify([prod.__dict__() for prod in pd.read()]), 200
 
 @app.route('/product-brand')
 def product_brand():
-    return pbd.read()[0].__dict__()
+    return jsonify([prod_br.__dict__() for prod_br in pbd.read()]), 200
 
 @app.route('/product_rating')
 def product_rating():
