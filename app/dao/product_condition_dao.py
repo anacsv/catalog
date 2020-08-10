@@ -1,13 +1,14 @@
 from app.dao.base_dao import BaseDao
 from app.model.product_condition import ProductCondition
 
+
 class ProductConditionDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_condition'
         super().__init__()
 
-    #read
+    # read
     def read(self, id: int = None):
         sql_select = f'SELECT id, name, description FROM {self.__table_name}'
         if id:
@@ -16,7 +17,7 @@ class ProductConditionDao(BaseDao):
         data = super().read(sql_select)
         return self.__convert_data_object(data)
 
-    #create
+    # create
     def create(self, model: ProductCondition) -> str:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
@@ -28,7 +29,7 @@ class ProductConditionDao(BaseDao):
                     ;'''
         return super().insert(sql_insert)
 
-    #update
+    # update
     def update(self, model: ProductCondition) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
@@ -37,8 +38,8 @@ class ProductConditionDao(BaseDao):
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 
-    #delete
-    def delete(self, id:int)->str:
+    # delete
+    def delete(self, id: int) -> str:
         sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
         return super().delete(sql_delete)
 
@@ -52,7 +53,7 @@ class ProductConditionDao(BaseDao):
         condition = self.__obj_converter(data)
         return condition
 
-    def __obj_converter(self, item_tuple:tuple) -> ProductCondition:
+    def __obj_converter(self, item_tuple: tuple) -> ProductCondition:
         model = ProductCondition()
         model.id = item_tuple[0]
         model.name = item_tuple[1]
