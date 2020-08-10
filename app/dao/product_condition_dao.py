@@ -18,7 +18,7 @@ class ProductConditionDao(BaseDao):
         return self.__convert_data_object(data)
 
     # create
-    def create(self, model: ProductCondition) -> str:
+    def create(self, model: ProductCondition) -> ProductCondition:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
                     (
