@@ -15,12 +15,12 @@ def initial():
     return pd.read()[0].__dict__()
 
 
-@app.route('/product-category/')
+@app.route('/product-category')
 def product_category():
     return p_category_dao.read()[0].__dict__()
 
 
-@app.route('/product-condition/')
+@app.route('/product-condition')
 def product_condition():
     return p_condition_dao.read()[0].__dict__()
 
