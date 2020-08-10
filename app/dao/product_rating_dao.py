@@ -1,4 +1,4 @@
-from app.dao.base_dao import BaseDao
+from base_dao import BaseDao
 from app.model.product_rating import ProductRating
 
 class ProductRatingDao(BaseDao):
@@ -24,6 +24,8 @@ class ProductRatingDao(BaseDao):
                         0
                         ,'{model.score}'
                         ,'{model.status}'
+                        ,'{model.person_id}'
+                        ,{model.product_id}
                     )
                     ;'''
         return super().insert(sql_insert)
@@ -35,6 +37,8 @@ class ProductRatingDao(BaseDao):
                     
                     score = '{model.score}'
                     , status = '{model.status}'
+                    , person_id = '{model.person_id}'
+                    , product_id = '{model.product_id}'
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 
@@ -58,4 +62,6 @@ class ProductRatingDao(BaseDao):
         model.id = item_tuple[0]
         model.score = item_tuple[1]
         model.status = item_tuple[2]
+        model.person_id = item_tuple[3]
+        model.product_id = item_tuple[4]
         return model
