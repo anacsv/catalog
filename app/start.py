@@ -31,19 +31,19 @@ def initial():
 def product():
     return jsonify([p.__dict__() for p in p_dao.read()]), 200
 
-@app.route('/product/', methods=['POST'])
-def product():
+@app.route('/product', methods=['POST'])
+def product_create():
     data = request.get_json()
     product = Product(**data)
     model = p_dao.create(product)
-    return (jsonify(model.__dict__()), 201
+    return (jsonify(model.__dict__())), 201
 
 @app.route('/product-brand', methods=['GET'])
 def product_brand():
     return jsonify([p_brand.__dict__() for p_brand in p_brand_dao.read()]), 200
 
 @app.route('/product-brand', methods=['POST'])
-def product_brand():
+def product_brand_create():
     data = request.get_json()
     product_brand = ProductBrand(**data)
     model = p_brand_dao.create(product_brand)

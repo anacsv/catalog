@@ -35,7 +35,8 @@ class ProductDao(BaseDao):
                         ,'{model.shipping_country_id}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     # update    
     def update(self, model: Product) -> str:
