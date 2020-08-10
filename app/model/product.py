@@ -72,7 +72,7 @@ class Product(BaseModel):
         self.__shipping_country_id = int(shipping_country_id)
 
     def __str__(self):
-        return f'{self.id};{self.name};{self.price};{self.gtin};{self.__brand_id}; {self.__product_condition_id}; {self.__shipping_country_id}'
+        return f'{self.id};{self.name};{self.price};{self.gtin};{self.brand_id}; {self.product_condition_id}; {self.shipping_country_id}'
 
     def __dict__(self):
         return {
@@ -80,7 +80,7 @@ class Product(BaseModel):
             'name': self.name,
             'price': self.price,
             'gtin': self.gtin,
-            'brand_id': self.__brand_id,
-            'product_condition_id': self.__product_condition_id,
-            'shipping_country_id': self.__shipping_country_id
+            'brand_id': self.brand_id,
+            'product_condition_id': self.product_condition_id,
+            'shipping_country_id': self.shipping_country_id
         }

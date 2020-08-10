@@ -1,7 +1,8 @@
 from app.dao.base_dao import BaseDao
 from app.model.product import Product
 
-class ProductDao(BaseDao):
+
+class ProductBrandDao(BaseDao):
 
     def __init__(self):
         super().__init__()
