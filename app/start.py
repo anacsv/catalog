@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask #render_template, request, redirect, url_for, session
+
 
 from app.dao.product_brand_dao import ProductBrandDao
 from app.dao.product_dao import ProductDao
@@ -12,7 +13,23 @@ pbd = ProductBrandDao()
 
 @app.route('/')
 def initial():
+    return ' '
+
+
+# ------------ Product
+@app.route('/product/')
+def product():
     return pd.read()[0].__dict__()
+
+
+# ------------ Product Brand
+@app.route('/product-brand/')
+def product_brand():
+    return pbd.read()[0].__dict__()
+
+
+
+
 
 app.run(debug=True)
 
