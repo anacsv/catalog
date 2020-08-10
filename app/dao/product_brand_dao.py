@@ -1,5 +1,5 @@
 from app.dao.base_dao import BaseDao
-from app.model.product import Product
+from app.model.product_brand import ProductBrand
 
 
 class ProductBrandDao(BaseDao):
@@ -15,13 +15,13 @@ class ProductBrandDao(BaseDao):
         data = super().read(sql_select)
         return self.__convert_data_object(data)
 
-    def __create_object(self, item_str: str) -> Product:
-        product = Product()
+    def __create_object(self, item_str: str) -> ProductBrand:
+        product_brand = ProductBrand()
         obj_array = item_str.split(';')
-        product.id = obj_array[0]
-        product.name = obj_array[1]
-        product.fullname = obj_array[2]
-        return product
+        product_brand.id = obj_array[0]
+        product_brand.name = obj_array[1]
+        product_brand.fullname = obj_array[2]
+        return product_brand
 
 
         

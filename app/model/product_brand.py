@@ -22,7 +22,7 @@ class ProductBrand(BaseModel):
         return self.__full_name
 
     @full_name.setter
-    def full_name(self, fullname: str) -> None:
+    def full_name(self, full_name: str) -> None:
         self.__full_name = str(full_name)
 
     def __str__(self):

@@ -6,7 +6,7 @@ class Product(BaseModel):
     def __init__(self, name: str = '', price: float = 0.0,
                  description: str = '', gtin='', product_condition_id=0,
                  brand_id=0, shipping_country_id=0, id: int = 0):
-        self.__nome = name
+        self.__name = name
         self.__price = price
         self.__description = description
         self.__gtin = gtin
