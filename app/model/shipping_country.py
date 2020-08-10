@@ -3,8 +3,8 @@ from app.model.base_model import BaseModel
 class ShippingCountry(BaseModel):
 
     def __init__(self, name: str = '', imported: bool = 0, id: int = 0):
-        self.__name = name
-        self.__imported = imported
+        self.__name = str(name)
+        self.__imported = bool(imported)
         super().__init__(id)
 
     @property
