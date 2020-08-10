@@ -1,4 +1,4 @@
-from base_dao import BaseDao
+from app.dao.base_dao import BaseDao
 from app.model.product_rating import ProductRating
 
 class ProductRatingDao(BaseDao):
@@ -9,7 +9,7 @@ class ProductRatingDao(BaseDao):
 
     #read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, score, status FROM {self.__table_name}'
+        sql_select = f'SELECT id, score, status, person_id, product_id FROM {self.__table_name}'
         if id:
             sql_select += f' WHERE id= {id} '
 
@@ -25,7 +25,7 @@ class ProductRatingDao(BaseDao):
                         ,'{model.score}'
                         ,'{model.status}'
                         ,'{model.person_id}'
-                        ,{model.product_id}
+                        ,'{model.product_id}'
                     )
                     ;'''
         return super().insert(sql_insert)
@@ -34,7 +34,6 @@ class ProductRatingDao(BaseDao):
     def update(self, model: ProductRating) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
-                    
                     score = '{model.score}'
                     , status = '{model.status}'
                     , person_id = '{model.person_id}'

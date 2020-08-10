@@ -13,7 +13,7 @@ def initial():
     return pd.read()[0].__dict__()
 
 @app.route('/product_rating')
-def product_rating_inicial():
+def product_rating():
     return pr.read()[0].__dict__()
 
 app.run(debug=True)
