@@ -2,10 +2,10 @@ from app.model.base_model import BaseModel
 
 class ShippingCountry(BaseModel):
 
-    def __init__(self, name: str, imported: str, id: int = 0):
+    def __init__(self, name: str = '', imported: str = '', id: int = 0):
         self.__name = name
         self.__imported = imported
-        super().__init__(id = id)
+        super().__init__(id)
 
     @property
     def name(self) -> str:
@@ -22,3 +22,13 @@ class ShippingCountry(BaseModel):
     @imported.setter
     def imported(self, imported:str):
         self.__imported = imported
+
+    def __str__(self):
+        return f'{self.id};{self.name};{self.imported}'
+
+    def __dict__(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'imported': self.imported
+        }
