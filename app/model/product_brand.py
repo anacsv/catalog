@@ -4,9 +4,9 @@ from app.model.base_model import BaseModel
 class ProductBrand(BaseModel):
 
     def __init__(self, name: str = '',
-                fullname: str = '', id:int = 0):
+                 full_name: str = '', id:int = 0):
         self.__name = name
-        self.__fullname = fullname
+        self.__full_name = full_name
         super().__init__(id)
 
     @property
@@ -18,19 +18,19 @@ class ProductBrand(BaseModel):
         self.__name = str(name)
 
     @property
-    def fullname(self) -> str:
-        return self.__fullname
+    def full_name(self) -> str:
+        return self.__full_name
 
-    @fullname.setter
-    def fullname(self, fullname: str) -> None:
-        self.__fullname = str(fullname)
+    @full_name.setter
+    def full_name(self, fullname: str) -> None:
+        self.__full_name = str(full_name)
 
     def __str__(self):
-        return f'{self.id};{self.name};{self.fullname}'
+        return f'{self.id};{self.name};{self.full_name}'
 
     def __dict__(self):
         return {
             'id': self.id,
             'name': self.name,
-            'price': self.fullname
+            'price': self.full_name
         }
