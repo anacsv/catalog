@@ -1,13 +1,14 @@
 from app.dao.base_dao import BaseDao
 from app.model.product_category import ProductCategory
 
+
 class ProductCategoryDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_category'
         super().__init__()
 
-    #read
+    # read
     def read(self, id: int = None):
         sql_select = f'SELECT id, name, description FROM {self.__table_name}'
         if id:
@@ -16,7 +17,7 @@ class ProductCategoryDao(BaseDao):
         data = super().read(sql_select)
         return self.__convert_data_object(data)
 
-    #create
+    # create
     def create(self, model: ProductCategory) -> str:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
@@ -28,7 +29,7 @@ class ProductCategoryDao(BaseDao):
                     ;'''
         return super().insert(sql_insert)
 
-    #update
+    # update
     def update(self, model: ProductCategory) -> str:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
@@ -37,8 +38,8 @@ class ProductCategoryDao(BaseDao):
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 
-    #delete
-    def delete(self, id:int)->str:
+    # delete
+    def delete(self, id: int) -> str:
         sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
         return super().delete(sql_delete)
 
@@ -52,7 +53,7 @@ class ProductCategoryDao(BaseDao):
         category = self.__obj_converter(data)
         return category
 
-    def __obj_converter(self, item_tuple:tuple) -> ProductCategory:
+    def __obj_converter(self, item_tuple: tuple) -> ProductCategory:
         model = ProductCategory()
         model.id = item_tuple[0]
         model.name = item_tuple[1]
