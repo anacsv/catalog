@@ -7,10 +7,6 @@ class ProductDao(BaseDao):
         self.__table_name = 'product'
         super().__init__()
 
-    def teste(self):
-        p = Product()
-        p.name = 'Xaomi da Ana'
-        return p.name
     # read
     def read(self, id: int = None):
         sql_select = f'SELECT id, name, description, price, gtin, product_condition_id, brand_id, shipping_country_id FROM {self.__table_name}'
@@ -44,11 +40,11 @@ class ProductDao(BaseDao):
                     SET
                     name = '{model.name}'
                     ,description = '{model.description}'
-                    description = '{model.price}'
-                    description = '{model.gtin}'
-                    description = '{model.product_condition_id}'
-                    description = '{model.brand_id}'
-                    description = '{model.shipping_country_id}'
+                    ,price = '{model.price}'
+                    ,gtin = '{model.gtin}'
+                    ,product_condition_id = '{model.product_condition_id}'
+                    ,brand_id = '{model.brand_id}'
+                    ,shipping_country_id = '{model.shipping_country_id}'
                     WHERE id = {model.id}; '''
         return super().update(sql_update)
 

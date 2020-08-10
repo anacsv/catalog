@@ -9,7 +9,7 @@ class ProductBrandDao(BaseDao):
         super().__init__()
     # read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, fullname FROM {self.__table_name}'
+        sql_select = f'SELECT id, name, full_name FROM {self.__table_name}'
         if id:
             sql_select += f' WHERE id= {id} '
 
@@ -24,7 +24,7 @@ class ProductBrandDao(BaseDao):
                        (
                            0
                            ,'{model.name}'
-                           ,'{model.fullname}'
+                           ,'{model.full_name}'
                        )
                        ;'''
         model.id = super().insert(sql_insert)
@@ -36,7 +36,7 @@ class ProductBrandDao(BaseDao):
         sql_update = f'''UPDATE {self.__table_name} 
                        SET
                        name = '{model.name}'
-                       ,description = '{model.fullname}'
+                       ,full_name = '{model.full_name}'
                        WHERE id = {model.id}; '''
         return super().update(sql_update)
 
@@ -50,8 +50,8 @@ class ProductBrandDao(BaseDao):
         if type(data) == list:
             brands = []
             for item in data:
-                brands = self.__obj_converter(item)
-                brands.append(brands)
+                brand = self.__obj_converter(item)
+                brands.append(brand)
             return brands
         brands = self.__obj_converter(data)
         return brands
@@ -60,5 +60,5 @@ class ProductBrandDao(BaseDao):
         model = ProductBrand()
         model.id = item_tuple[0]
         model.name = item_tuple[1]
-        model.fullname = item_tuple[2]
+        model.full_name = item_tuple[2]
         return model

@@ -32,5 +32,5 @@ class ProductBrand(BaseModel):
         return {
             'id': self.id,
             'name': self.name,
-            'price': self.full_name
+            'full_name': self.full_name
         }
