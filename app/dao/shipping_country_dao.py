@@ -26,7 +26,8 @@ class ShippingCountryDao(BaseDao):
                         ,'{model.imported}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     #update
     def update(self, model: ShippingCountry) -> str:

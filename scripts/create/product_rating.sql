@@ -4,7 +4,7 @@
 -- Has relahionship with:
 --     product (1:1)
 
-CREATE TABLE product_hating (
+CREATE TABLE product_rating (
     id int NOT NULL AUTO_INCREMENT,
     score int NOT NULL,
     status varchar(64) NOT NULL,
