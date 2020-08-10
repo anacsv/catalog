@@ -31,11 +31,11 @@ def product_brand():
 
 @app.route('/product_rating')
 def product_rating():
-    return pr.read()[0].__dict__()
+    return jsonify([prod_rat.__dict__() for prod_rat in pr.read()]), 200
 
 @app.route('/shipping_country')
 def shipping_country():
-    return sc.read()[0].__dict__()
+    return jsonify([ship_coun.__dict__() for ship_coun in sc.read()]), 200
 
 @app.route('/product-category')
 def product_category():
