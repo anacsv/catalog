@@ -1,30 +1,41 @@
 from flask import Flask, jsonify, request
+from flask_restful import Api
 
-from app.dao.product_brand_dao import ProductBrandDao
+
+from app.controller.product_brand_controller import ProductBrandController
+
+
 from app.dao.product_dao import ProductDao
 from app.dao.product_rating_dao import ProductRatingDao
 from app.dao.shipping_country_dao import ShippingCountryDao
 from app.dao.product_category_dao import ProductCategoryDao
 from app.dao.product_condition_dao import ProductConditionDao
 from app.model.product import Product
-from app.model.product_brand import ProductBrand
 from app.model.product_condition import ProductCondition
 from app.model.product_rating import ProductRating
 from app.model.shipping_country import ShippingCountry
 from app.model.product_category import ProductCategory
 
+#command+d -> ctrl+g
 
 app = Flask(__name__)
+api = Api(app)
+
 
 p_dao = ProductDao()
 p = Product()
-p_brand_dao = ProductBrandDao()
-p_brand = ProductBrand()
 
 pr = ProductRatingDao()
 sc = ShippingCountryDao()
 p_category_dao = ProductCategoryDao()
 p_condition_dao = ProductConditionDao()
+
+
+
+# ------------------------------------------ Product Brand
+api.add_resource(ProductBrandController, '/api/product-brand/', endpoint='product-brands')
+api.add_resource(ProductBrandController,  endpoint='product-brand')
+# ------------------------------------------ Product Brand finish
 
 
 @app.route('/')
@@ -45,47 +56,19 @@ def product_create():
     return (jsonify(model.__dict__())), 201
 
 
-    @app.route('/product', methods=['DELETE'])
-    def product_delete():
-        id = request.args.get('id')
-        message = p_dao.delete(id)
-        return jsonify(message), 200
-
-    @app.route('/product', methods=['PUT'])
-    def product_update():
-        data = request.get_json()
-        product = Product(**data)
-        message = p_dao.update(product)
-        return jsonify(message), 200
-
-# ------------------------------------------ Product Brand
-@app.route('/product-brand', methods=['GET'])
-def product_brand():
-    return jsonify([p_brand.__dict__() for p_brand in p_brand_dao.read()]), 200
-
-
-@app.route('/product-brand', methods=['POST'])
-def product_brand_create():
-    data = request.get_json()
-    product_brand = ProductBrand(**data)
-    model = p_brand_dao.create(product_brand)
-    return (jsonify(model.__dict__())), 201
-
-
-@app.route('/product-brand', methods=['DELETE'])
-def product_brand_delete():
+@app.route('/product', methods=['DELETE'])
+def product_delete():
     id = request.args.get('id')
-    message = p_brand_dao.delete(id)
+    message = p_dao.delete(id)
     return jsonify(message), 200
 
-
-@app.route('/product-brand', methods=['PUT'])
-def product_brand_update():
+@app.route('/product', methods=['PUT'])
+def product_update():
     data = request.get_json()
-    product_brand = ProductBrand(**data)
-    message = p_brand_dao.update(product_brand)
+    product = Product(**data)
+    message = p_dao.update(product)
     return jsonify(message), 200
-# ------------------------------------------ Product Brand finish
+
 
 # ------------------------------------------ Product Rating init
 @app.route('/product-rating', methods=["GET"])
@@ -193,6 +176,10 @@ def product_condition_delete():
     id = request.args.get('id')
     message = p_condition_dao.delete(id)
     return jsonify(message), 200
+
+
+
+
 
 
 app.run(debug=True)
