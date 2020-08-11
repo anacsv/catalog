@@ -10,13 +10,9 @@ from app.controller.product_condition_controller import ProductConditionControll
 from app.dao.product_dao import ProductDao
 from app.dao.product_rating_dao import ProductRatingDao
 from app.dao.shipping_country_dao import ShippingCountryDao
-from app.dao.product_category_dao import ProductCategoryDao
-from app.dao.product_condition_dao import ProductConditionDao
 from app.model.product import Product
-from app.model.product_condition import ProductCondition
 from app.model.product_rating import ProductRating
 from app.model.shipping_country import ShippingCountry
-from app.model.product_category import ProductCategory
 
 #command+d -> ctrl+g
 
@@ -29,9 +25,6 @@ p = Product()
 
 pr = ProductRatingDao()
 sc = ShippingCountryDao()
-p_category_dao = ProductCategoryDao()
-p_condition_dao = ProductConditionDao()
-
 
 
 # ------------------------------------------ Product Brand
