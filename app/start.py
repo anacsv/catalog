@@ -124,7 +124,7 @@ def shipping_country_delete():
 # ------------------------------------------ Shipping Country finish
 
 api.add_resource(ProductCategoryController, '/api/product-category/', endpoint='product-categories')
-# api.add_resource(ProductCategoryController, '/api/product-category/<int:id>', endpoint='product-category')
+api.add_resource(ProductCategoryController, '/api/product-category/<int:id>/', endpoint='product-category')
 
 @app.route('/product-category', methods=['POST'])
 def product_category_create():
