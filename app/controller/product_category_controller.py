@@ -28,5 +28,6 @@ class ProductCategoryController(Resource):
         message = self.__dao.update(product_category)
         return jsonify(message)
 
-    def delete(self):
-        pass
+    def delete(self, id):
+        message = self.__dao.delete(id)
+        return jsonify(message)
