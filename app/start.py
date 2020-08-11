@@ -3,14 +3,13 @@ from flask_restful import Api
 
 
 from app.controller.product_brand_controller import ProductBrandController
+from app.controller.product_controller import ProductController
 
 
-from app.dao.product_dao import ProductDao
 from app.dao.product_rating_dao import ProductRatingDao
 from app.dao.shipping_country_dao import ShippingCountryDao
 from app.dao.product_category_dao import ProductCategoryDao
 from app.dao.product_condition_dao import ProductConditionDao
-from app.model.product import Product
 from app.model.product_condition import ProductCondition
 from app.model.product_rating import ProductRating
 from app.model.shipping_country import ShippingCountry
@@ -20,10 +19,6 @@ from app.model.product_category import ProductCategory
 
 app = Flask(__name__)
 api = Api(app)
-
-
-p_dao = ProductDao()
-p = Product()
 
 pr = ProductRatingDao()
 sc = ShippingCountryDao()
@@ -38,37 +33,15 @@ api.add_resource(ProductBrandController, '/api/product-brand/<int:id>', endpoint
 # ------------------------------------------ Product Brand finish
 
 
+# ------------------------------------------ Product
+api.add_resource(ProductController, '/api/product/', endpoint='products')
+api.add_resource(ProductController, '/api/product/<int:id>', endpoint='product')
+# ------------------------------------------ Product finish
+
+
 @app.route('/')
 def initial():
     return ' '
-
-
-@app.route('/product', methods=['GET'])
-def product():
-    return jsonify([p.__dict__() for p in p_dao.read()]), 200
-
-
-@app.route('/product', methods=['POST'])
-def product_create():
-    data = request.get_json()
-    product = Product(**data)
-    model = p_dao.create(product)
-    return (jsonify(model.__dict__())), 201
-
-
-@app.route('/product', methods=['DELETE'])
-def product_delete():
-    id = request.args.get('id')
-    message = p_dao.delete(id)
-    return jsonify(message), 200
-
-@app.route('/product', methods=['PUT'])
-def product_update():
-    data = request.get_json()
-    product = Product(**data)
-    message = p_dao.update(product)
-    return jsonify(message), 200
-
 
 # ------------------------------------------ Product Rating init
 @app.route('/product-rating', methods=["GET"])
