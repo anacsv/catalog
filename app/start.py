@@ -34,7 +34,7 @@ p_condition_dao = ProductConditionDao()
 
 # ------------------------------------------ Product Brand
 api.add_resource(ProductBrandController, '/api/product-brand/', endpoint='product-brands')
-api.add_resource(ProductBrandController,  endpoint='product-brand')
+api.add_resource(ProductBrandController, '/api/product-brand/<int:id>', endpoint='product-brand')
 # ------------------------------------------ Product Brand finish
 
 
