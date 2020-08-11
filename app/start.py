@@ -108,6 +108,7 @@ def shipping_country_delete():
     message = sc.delete(id)
     return jsonify(message), 200
 
+
 @app.route('/product-category', methods=['GET'])
 def product_category():
     return jsonify([p_category.__dict__() for p_category in p_category_dao.read()]), 200
@@ -119,6 +120,14 @@ def product_category_create():
     product_category = ProductCategory(**data)
     model = p_category_dao.create(product_category)
     return jsonify(model.__dict__()), 201
+
+
+@app.route('/product-category', methods=['PUT'])
+def product_category_update():
+    data = request.get_json()
+    product_category = ProductCategory(**data)
+    message = p_category_dao.update(product_category)
+    return jsonify(message), 200
 
 
 @app.route('/product-category', methods=['DELETE'])
