@@ -3,6 +3,7 @@ from flask_restful import Api
 
 
 from app.controller.product_brand_controller import ProductBrandController
+from app.controller.product_category_controller import ProductCategoryController
 
 
 from app.dao.product_dao import ProductDao
@@ -122,10 +123,8 @@ def shipping_country_delete():
     return jsonify(message), 200
 # ------------------------------------------ Shipping Country finish
 
-@app.route('/product-category', methods=['GET'])
-def product_category():
-    return jsonify([p_category.__dict__() for p_category in p_category_dao.read()]), 200
-
+api.add_resource(ProductCategoryController, '/api/product-category/', endpoint='product-categories')
+# api.add_resource(ProductCategoryController, '/api/product-category/<int:id>', endpoint='product-category')
 
 @app.route('/product-category', methods=['POST'])
 def product_category_create():

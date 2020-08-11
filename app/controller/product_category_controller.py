@@ -1,6 +1,25 @@
-from app.controller.base_controller import BaseController
+from app.dao.product_category_dao import ProductCategoryDao
+from flask import jsonify, request
+from flask_restful import Resource
 
-class ProductCategoryController(BaseController):
+from app.model.product_category import ProductCategory
+
+
+class ProductCategoryController(Resource):
 
     def __init__(self):
-        super().__init__()
+        self.__dao = ProductCategoryDao()
+
+    def get(self, id: int = None):
+        if id:
+            return jsonify(self.__dao.read(id).__dict__())
+        return jsonify([p_category.__dict__() for p_category in self.__dao.read()])
+
+    def post(self):
+        pass
+
+    def update(self):
+        pass
+
+    def delete(self):
+        pass
