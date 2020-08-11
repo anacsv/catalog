@@ -85,6 +85,12 @@ def product_rating_create():
     model = pr.create(product_rating)
     return (jsonify(model.__dict__()), 201)
 
+@app.route('/product-rating', methods=['DELETE'])
+def product_rating_delete():
+    id = request.args.get('id')
+    message = pr.delete(id)
+    return jsonify(message), 200
+
 @app.route('/shipping-country', methods=["GET"])
 def shipping_country():
     return jsonify([ship_coun.__dict__() for ship_coun in sc.read()]), 200
@@ -96,6 +102,11 @@ def shipping_country_create():
     model = sc.create(shipping_country)
     return (jsonify(model.__dict__()), 201)
 
+@app.route('/shipping-country', methods=['DELETE'])
+def shipping_country_delete():
+    id = request.args.get('id')
+    message = sc.delete(id)
+    return jsonify(message), 200
 
 @app.route('/product-category', methods=['GET'])
 def product_category():
