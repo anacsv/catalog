@@ -164,6 +164,14 @@ def product_condition_create():
     return jsonify(model.__dict__()), 201
 
 
+@app.route('/product-condition', methods=['PUT'])
+def product_condition_update():
+    data = request.get_json()
+    product_condition = ProductCondition(**data)
+    message = p_condition_dao.update(product_condition)
+    return jsonify(message), 200
+
+
 @app.route('/product-condition', methods=['DELETE'])
 def product_condition_delete():
     id = request.args.get('id')

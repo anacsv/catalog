@@ -31,13 +31,16 @@ class ProductConditionDao(BaseDao):
         return model
 
     # update
-    def update(self, model: ProductCondition) -> str:
+    def update(self, model: ProductCondition) -> dict:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
                     name = '{model.name}'
                     ,description = '{model.description}'
                     WHERE id = {model.id}; '''
-        return super().update(sql_update)
+        rows = super().update(sql_update)
+        if rows:
+            return model.__dict__()
+        return {'success': False, 'message': "not affected"}
 
     # delete
     def delete(self, id: int) -> dict:
