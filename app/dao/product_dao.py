@@ -46,7 +46,10 @@ class ProductDao(BaseDao):
                     ,brand_id = '{model.brand_id}'
                     ,shipping_country_id = '{model.shipping_country_id}'
                     WHERE id = {model.id}; '''
-        return super().update(sql_update)
+        rows = super().update(sql_update)
+        if rows:
+            return model.__dict__()
+        return {'success': False, 'message': "not affected"}
 
     # delete
     def delete(self, id: int) -> str:

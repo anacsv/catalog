@@ -45,12 +45,18 @@ def product_create():
     return (jsonify(model.__dict__())), 201
 
 
-@app.route('/product', methods=['DELETE'])
-def product_delete():
-    id = request.args.get('id')
-    message = p_dao.delete(id)
-    return jsonify(message), 200
+    @app.route('/product', methods=['DELETE'])
+    def product_delete():
+        id = request.args.get('id')
+        message = p_dao.delete(id)
+        return jsonify(message), 200
 
+    @app.route('/product', methods=['PUT'])
+    def product_update():
+        data = request.get_json()
+        product = Product(**data)
+        message = p_dao.update(product)
+        return jsonify(message), 200
 
 # ------------------------------------------ Product Brand
 @app.route('/product-brand', methods=['GET'])
@@ -70,6 +76,14 @@ def product_brand_create():
 def product_brand_delete():
     id = request.args.get('id')
     message = p_brand_dao.delete(id)
+    return jsonify(message), 200
+
+
+@app.route('/product', methods=['PUT'])
+def product_brand_update():
+    data = request.get_json()
+    product_brand = ProductBrand(**data)
+    message = p_brand_dao.update(product_brand)
     return jsonify(message), 200
 # ------------------------------------------ Product Brand finish
 
