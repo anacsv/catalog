@@ -127,27 +127,9 @@ def shipping_country_delete():
 api.add_resource(ProductCategoryController, '/api/product-category/', endpoint='product-categories')
 api.add_resource(ProductCategoryController, '/api/product-category/<int:id>/', endpoint='product-category')
 
+
 api.add_resource(ProductConditionController, '/api/product-condition/', endpoint='product-conditions')
 api.add_resource(ProductConditionController, '/api/product-condition/<int:id>/', endpoint='product-condition')
-
-
-@app.route('/product-condition', methods=['PUT'])
-def product_condition_update():
-    data = request.get_json()
-    product_condition = ProductCondition(**data)
-    message = p_condition_dao.update(product_condition)
-    return jsonify(message), 200
-
-
-@app.route('/product-condition', methods=['DELETE'])
-def product_condition_delete():
-    id = request.args.get('id')
-    message = p_condition_dao.delete(id)
-    return jsonify(message), 200
-
-
-
-
 
 
 app.run(debug=True)

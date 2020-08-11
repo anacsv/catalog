@@ -21,8 +21,13 @@ class ProductConditionController(Resource):
         model = self.__dao.create(product_condition)
         return jsonify(model.__dict__())
 
-    def put(self):
-        pass
+    def put(self, id):
+        data = request.get_json()
+        product_condition = ProductCondition(**data)
+        product_condition.id = id
+        message = self.__dao.update(product_condition)
+        return jsonify(message)
 
-    def delete(self):
-        pass
+    def delete(self, id):
+        message = self.__dao.delete(id)
+        return jsonify(message)
