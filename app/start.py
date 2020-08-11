@@ -131,14 +131,6 @@ api.add_resource(ProductConditionController, '/api/product-condition/', endpoint
 api.add_resource(ProductConditionController, '/api/product-condition/<int:id>/', endpoint='product-condition')
 
 
-@app.route('/product-condition', methods=['POST'])
-def product_condition_create():
-    data = request.get_json()
-    product_condition = ProductCondition(**data)
-    model = p_condition_dao.create(product_condition)
-    return jsonify(model.__dict__()), 201
-
-
 @app.route('/product-condition', methods=['PUT'])
 def product_condition_update():
     data = request.get_json()

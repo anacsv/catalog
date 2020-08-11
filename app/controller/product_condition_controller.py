@@ -16,7 +16,10 @@ class ProductConditionController(Resource):
         return jsonify([p_condition.__dict__() for p_condition in self.__dao.read()])
 
     def post(self):
-        pass
+        data = request.get_json()
+        product_condition = ProductCondition(**data)
+        model = self.__dao.create(product_condition)
+        return jsonify(model.__dict__())
 
     def put(self):
         pass
