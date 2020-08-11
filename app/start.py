@@ -7,6 +7,7 @@ from app.dao.shipping_country_dao import ShippingCountryDao
 from app.dao.product_category_dao import ProductCategoryDao
 from app.dao.product_condition_dao import ProductConditionDao
 from app.model.product_condition import ProductCondition
+from app.model.product_category import ProductCategory
 
 app = Flask(__name__)
 
@@ -38,13 +39,23 @@ def product_rating():
 def shipping_country():
     return jsonify([ship_coun.__dict__() for ship_coun in sc.read()]), 200
 
-@app.route('/product-category')
+@app.route('/product-category', methods=['GET'])
 def product_category():
     return jsonify([p_category.__dict__() for p_category in p_category_dao.read()]), 200
+
+
+@app.route('/product-category', methods=['POST'])
+def product_category_create():
+    data = request.get_json()
+    product_category = ProductCategory(**data)
+    model = p_category_dao.create(product_category)
+    return jsonify(model.__dict__()), 201
+
 
 @app.route('/product-condition', methods=['GET'])
 def product_condition():
     return jsonify([p_condition.__dict__() for p_condition in p_condition_dao.read()]), 200
+
 
 @app.route('/product-condition', methods=['POST'])
 def product_condition_create():
