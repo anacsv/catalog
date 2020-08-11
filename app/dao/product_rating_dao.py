@@ -40,7 +40,10 @@ class ProductRatingDao(BaseDao):
                     , person_id = '{model.person_id}'
                     , product_id = '{model.product_id}'
                     WHERE id = {model.id}; '''
-        return super().update(sql_update)
+        rows = super().update(sql_update)
+        if rows:
+            return model.__dict__()
+        return {'success': False, 'message': "not affected"}
 
     #delete
     def delete(self, id:int)->dict:

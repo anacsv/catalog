@@ -36,7 +36,10 @@ class ShippingCountryDao(BaseDao):
                     name = '{model.name}'
                     , imported = '{model.imported}'
                     WHERE id = {model.id}; '''
-        return super().update(sql_update)
+        rows = super().update(sql_update)
+        if rows:
+            return model.__dict__()
+        return {'success': False, 'message': "not affected"}
 
     #delete
     def delete(self, id:int)->dict:
