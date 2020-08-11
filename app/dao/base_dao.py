@@ -32,7 +32,7 @@ class BaseDao:
         return result
 
     #read
-    def read(self, sql_select:str):
+    def read(self, sql_select: str):
         if 'where id'.lower() in sql_select.lower():
             return self.__read_by_id(sql_select)
         return self.__read_all(sql_select)
@@ -48,7 +48,8 @@ class BaseDao:
     def update(self, sql_update):
         self.__cursor.execute(sql_update)
         self.__connection.commit()
-        return self.__create_message('Alterado com sucesso!', 'success')
+        rows = self.__cursor.rowcount
+        return rows
 
     #delete
     def delete(self, sql_delete) -> int:
