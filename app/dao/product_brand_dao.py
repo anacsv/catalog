@@ -5,23 +5,60 @@ from app.model.product_brand import ProductBrand
 class ProductBrandDao(BaseDao):
 
     def __init__(self):
+        self.__table_name = 'product_brand'
         super().__init__()
-
+    # read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, fullname FROM {self.__table_name}'
+        sql_select = f'SELECT id, name, full_name FROM {self.__table_name}'
         if id:
             sql_select += f' WHERE id= {id} '
 
         data = super().read(sql_select)
         return self.__convert_data_object(data)
 
-    def __create_object(self, item_str: str) -> ProductBrand:
-        product_brand = ProductBrand()
-        obj_array = item_str.split(';')
-        product_brand.id = obj_array[0]
-        product_brand.name = obj_array[1]
-        product_brand.fullname = obj_array[2]
-        return product_brand
+        # create
 
+    def create(self, model: ProductBrand) -> str:
+        sql_insert = f'''INSERT INTO {self.__table_name}
+                       VALUES
+                       (
+                           0
+                           ,'{model.name}'
+                           ,'{model.full_name}'
+                       )
+                       ;'''
+        model.id = super().insert(sql_insert)
+        return model
 
-        
+        # update
+
+    def update(self, model: ProductBrand) -> str:
+        sql_update = f'''UPDATE {self.__table_name} 
+                       SET
+                       name = '{model.name}'
+                       ,full_name = '{model.full_name}'
+                       WHERE id = {model.id}; '''
+        return super().update(sql_update)
+
+        # delete
+
+    def delete(self, id: int) -> str:
+        sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
+        return super().delete(sql_delete)
+
+    def __convert_data_object(self, data):
+        if type(data) == list:
+            brands = []
+            for item in data:
+                brand = self.__obj_converter(item)
+                brands.append(brand)
+            return brands
+        brands = self.__obj_converter(data)
+        return brands
+
+    def __obj_converter(self, item_tuple: tuple) -> ProductBrand:
+        model = ProductBrand()
+        model.id = item_tuple[0]
+        model.name = item_tuple[1]
+        model.full_name = item_tuple[2]
+        return model
