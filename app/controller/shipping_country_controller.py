@@ -11,7 +11,7 @@ class ShippingCountryController(Resource):
     def get(self, id=None):
         if id:
             return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([ship_count.__dict__() for ship_count in self.__dao.read(id)])
+        return jsonify([ship_count.__dict__() for ship_count in self.__dao.read()])
 
 
     def post(self):
