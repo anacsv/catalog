@@ -96,6 +96,13 @@ def product_category_create():
     return jsonify(model.__dict__()), 201
 
 
+@app.route('/product-category', methods=['DELETE'])
+def product_category_delete():
+    id = request.args.get('id')
+    message = p_category_dao.delete(id)
+    return jsonify(message), 200
+
+
 @app.route('/product-condition', methods=['GET'])
 def product_condition():
     return jsonify([p_condition.__dict__() for p_condition in p_condition_dao.read()]), 200
@@ -106,6 +113,14 @@ def product_condition_create():
     data = request.get_json()
     product_condition = ProductCondition(**data)
     model = p_condition_dao.create(product_condition)
-    return (jsonify(model.__dict__()), 201)
+    return jsonify(model.__dict__()), 201
+
+
+@app.route('/product-condition', methods=['DELETE'])
+def product_condition_delete():
+    id = request.args.get('id')
+    message = p_condition_dao.delete(id)
+    return jsonify(message), 200
+
 
 app.run(debug=True)
