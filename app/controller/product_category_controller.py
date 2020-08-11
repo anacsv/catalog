@@ -16,7 +16,10 @@ class ProductCategoryController(Resource):
         return jsonify([p_category.__dict__() for p_category in self.__dao.read()])
 
     def post(self):
-        pass
+        data = request.get_json()
+        product_category = ProductCategory(**data)
+        model = self.__dao.create(product_category)
+        return jsonify(model.__dict__())
 
     def update(self):
         pass

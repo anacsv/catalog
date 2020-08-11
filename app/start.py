@@ -126,14 +126,6 @@ def shipping_country_delete():
 api.add_resource(ProductCategoryController, '/api/product-category/', endpoint='product-categories')
 api.add_resource(ProductCategoryController, '/api/product-category/<int:id>/', endpoint='product-category')
 
-@app.route('/product-category', methods=['POST'])
-def product_category_create():
-    data = request.get_json()
-    product_category = ProductCategory(**data)
-    model = p_category_dao.create(product_category)
-    return jsonify(model.__dict__()), 201
-
-
 @app.route('/product-category', methods=['PUT'])
 def product_category_update():
     data = request.get_json()
