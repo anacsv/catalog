@@ -17,7 +17,7 @@ class ShippingCountryDao(BaseDao):
         return self.__convert_data_object(data)
 
     #create
-    def create(self, model: ShippingCountry) -> str:
+    def create(self, model: ShippingCountry) -> ShippingCountry:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
                     (
@@ -26,10 +26,11 @@ class ShippingCountryDao(BaseDao):
                         ,'{model.imported}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     #update
-    def update(self, model: ShippingCountry) -> str:
+    def update(self, model: ShippingCountry) -> ShippingCountry:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
                     name = '{model.name}'
