@@ -73,7 +73,7 @@ def product_brand_delete():
     return jsonify(message), 200
 # ------------------------------------------ Product Brand finish
 
-
+# ------------------------------------------ Product Rating init
 @app.route('/product-rating', methods=["GET"])
 def product_rating():
     return jsonify([prod_rat.__dict__() for prod_rat in pr.read()]), 200
@@ -85,12 +85,21 @@ def product_rating_create():
     model = pr.create(product_rating)
     return (jsonify(model.__dict__()), 201)
 
+
+@app.route('/product-rating', methods=['PUT'])
+def product_rating_update():
+    data = request.get_json()
+    product_rating = ProductRating(**data)
+    message = pr.update(product_rating)
+    return jsonify(message), 200
+
 @app.route('/product-rating', methods=['DELETE'])
 def product_rating_delete():
     id = request.args.get('id')
     message = pr.delete(id)
     return jsonify(message), 200
-
+# ------------------------------------------ Product Rating finish
+# ------------------------------------------ Shipping Country init
 @app.route('/shipping-country', methods=["GET"])
 def shipping_country():
     return jsonify([ship_coun.__dict__() for ship_coun in sc.read()]), 200
@@ -102,12 +111,19 @@ def shipping_country_create():
     model = sc.create(shipping_country)
     return (jsonify(model.__dict__()), 201)
 
+@app.route('/shipping-country', methods=['PUT'])
+def shipping_country_update():
+    data = request.get_json()
+    shipping_country = ShippingCountry(**data)
+    message = sc.update(shipping_country)
+    return jsonify(message), 200
+
 @app.route('/shipping-country', methods=['DELETE'])
 def shipping_country_delete():
     id = request.args.get('id')
     message = sc.delete(id)
     return jsonify(message), 200
-
+# ------------------------------------------ Shipping Country finish
 
 @app.route('/product-category', methods=['GET'])
 def product_category():
