@@ -79,7 +79,7 @@ def product_brand_delete():
     return jsonify(message), 200
 
 
-@app.route('/product', methods=['PUT'])
+@app.route('/product-brand', methods=['PUT'])
 def product_brand_update():
     data = request.get_json()
     product_brand = ProductBrand(**data)
