@@ -31,9 +31,11 @@ p_condition_dao = ProductConditionDao()
 def initial():
     return ' '
 
+
 @app.route('/product', methods=['GET'])
 def product():
     return jsonify([p.__dict__() for p in p_dao.read()]), 200
+
 
 @app.route('/product', methods=['POST'])
 def product_create():
@@ -42,9 +44,19 @@ def product_create():
     model = p_dao.create(product)
     return (jsonify(model.__dict__())), 201
 
+
+@app.route('/product', methods=['DELETE'])
+def product_delete():
+    id = request.args.get('id')
+    message = p_dao.delete(id)
+    return jsonify(message), 200
+
+
+# ------------------------------------------ Product Brand
 @app.route('/product-brand', methods=['GET'])
 def product_brand():
     return jsonify([p_brand.__dict__() for p_brand in p_brand_dao.read()]), 200
+
 
 @app.route('/product-brand', methods=['POST'])
 def product_brand_create():
@@ -53,12 +65,14 @@ def product_brand_create():
     model = p_brand_dao.create(product_brand)
     return (jsonify(model.__dict__())), 201
 
+
 @app.route('/product-brand', methods=['DELETE'])
 def product_brand_delete():
     id = request.args.get('id')
     message = p_brand_dao.delete(id)
-
     return jsonify(message), 200
+# ------------------------------------------ Product Brand finish
+
 
 @app.route('/product-rating', methods=["GET"])
 def product_rating():
