@@ -49,7 +49,7 @@ class ProductDao(BaseDao):
         return super().update(sql_update)
 
     # delete
-    def delete(self, id:int)->str:
+    def delete(self, id: int) -> str:
         sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
         return super().delete(sql_delete)
 

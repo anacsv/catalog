@@ -53,6 +53,13 @@ def product_brand_create():
     model = p_brand_dao.create(product_brand)
     return (jsonify(model.__dict__())), 201
 
+@app.route('/product-brand', methods=['DELETE'])
+def product_brand_delete():
+    id = request.args.get('id')
+    message = p_brand_dao.delete(id)
+
+    return jsonify(message), 200
+
 @app.route('/product-rating', methods=["GET"])
 def product_rating():
     return jsonify([prod_rat.__dict__() for prod_rat in pr.read()]), 200

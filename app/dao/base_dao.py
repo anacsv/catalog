@@ -51,8 +51,8 @@ class BaseDao:
         return self.__create_message('Alterado com sucesso!', 'success')
 
     #delete
-    def delete(self, sql_delete):
+    def delete(self, sql_delete) -> int:
         self.__cursor.execute(sql_delete)
         self.__connection.commit()
-        return self.__create_message('Deletado com sucesso!', 'success')
-
+        rows = self.__cursor.rowcount
+        return rows

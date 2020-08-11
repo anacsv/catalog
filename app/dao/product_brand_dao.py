@@ -40,11 +40,13 @@ class ProductBrandDao(BaseDao):
                        WHERE id = {model.id}; '''
         return super().update(sql_update)
 
-        # delete
-
-    def delete(self, id: int) -> str:
+    # delete
+    def delete(self, id: int) -> dict:
         sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
-        return super().delete(sql_delete)
+        rows = super().delete(sql_delete)
+        if rows:
+            return {'success': True, 'message': "product_brand deleted"}
+        return {'success': False, 'message': "not found"}
 
     def __convert_data_object(self, data):
         if type(data) == list:
