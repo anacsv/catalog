@@ -28,6 +28,7 @@ def initial():
 def product():
     return jsonify([prod.__dict__() for prod in pd.read()]), 200
 
+
 @app.route('/product-brand')
 def product_brand():
     return jsonify([prod_br.__dict__() for prod_br in pbd.read()]), 200
