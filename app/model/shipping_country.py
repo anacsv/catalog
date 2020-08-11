@@ -5,7 +5,7 @@ class ShippingCountry(BaseModel):
     def __init__(self, name: str = '', imported: bool = 0, id: int = 0):
         self.__name = str(name)
         self.__imported = bool(imported)
-        super().__init__(id)
+        super().__init__(id=id)
 
     @property
     def name(self) -> str:

@@ -7,7 +7,7 @@ class ProductRating(BaseModel):
         self.__status = str(status)
         self.__person_id = int(person_id)
         self.__product_id = int(product_id)
-        super().__init__(id)
+        super().__init__(id=id)
 
     @property
     def score(self) -> str:

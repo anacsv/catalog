@@ -4,7 +4,7 @@
     -- product_brand (1:N)
     -- product_condition (1:1)
     -- shipping_country (1:1)
-    -- product_hating (1:1)
+    -- product_rating (1:1)
     -- product_category (N:N)
 
 CREATE TABLE product (
@@ -16,7 +16,7 @@ CREATE TABLE product (
     brand_id int,
     product_condition_id int,
     shipping_country_id int,
-    product_hating_id int,
+    product_rating_id int,
     PRIMARY KEY (id)
 );
 ALTER TABLE product
@@ -29,5 +29,5 @@ ALTER TABLE product
 ADD CONSTRAINT fk_shipping_country
 FOREIGN KEY (shipping_country_id) REFERENCES shipping_country(id);
 ALTER TABLE product
-ADD CONSTRAINT fk_product_hating
-FOREIGN KEY (product_hating_id) REFERENCES product_hating(id);
+ADD CONSTRAINT fk_product_rating
+FOREIGN KEY (product_rating_id) REFERENCES product_rating(id);

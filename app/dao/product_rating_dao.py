@@ -17,7 +17,7 @@ class ProductRatingDao(BaseDao):
         return self.__convert_data_object(data)
 
     #create
-    def create(self, model: ProductRating) -> str:
+    def create(self, model: ProductRating) -> ProductRating:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
                     (
@@ -28,10 +28,11 @@ class ProductRatingDao(BaseDao):
                         ,'{model.product_id}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     #update
-    def update(self, model: ProductRating) -> str:
+    def update(self, model: ProductRating) -> ProductRating:
         sql_update = f'''UPDATE {self.__table_name} 
                     SET
                     score = '{model.score}'
