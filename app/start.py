@@ -3,16 +3,14 @@ from flask_restful import Api
 
 
 from app.controller.product_brand_controller import ProductBrandController
-
+from app.controller.product_rating_controller import ProductRatingController
 
 from app.dao.product_dao import ProductDao
-from app.dao.product_rating_dao import ProductRatingDao
 from app.dao.shipping_country_dao import ShippingCountryDao
 from app.dao.product_category_dao import ProductCategoryDao
 from app.dao.product_condition_dao import ProductConditionDao
 from app.model.product import Product
 from app.model.product_condition import ProductCondition
-from app.model.product_rating import ProductRating
 from app.model.shipping_country import ShippingCountry
 from app.model.product_category import ProductCategory
 
@@ -25,7 +23,6 @@ api = Api(app)
 p_dao = ProductDao()
 p = Product()
 
-pr = ProductRatingDao()
 sc = ShippingCountryDao()
 p_category_dao = ProductCategoryDao()
 p_condition_dao = ProductConditionDao()
@@ -36,6 +33,12 @@ p_condition_dao = ProductConditionDao()
 api.add_resource(ProductBrandController, '/api/product-brand/', endpoint='product-brands')
 api.add_resource(ProductBrandController, '/api/product-brand/<int:id>', endpoint='product-brand')
 # ------------------------------------------ Product Brand finish
+
+
+# ------------------------------------------ Product Rating init
+api.add_resource(ProductRatingController, '/api/product-rating/', endpoint='product-ratings')
+api.add_resource(ProductRatingController, '/api/product-rating/<int:id>', endpoint='product-rating')
+# ------------------------------------------ Product Rating finish
 
 
 @app.route('/')
@@ -70,32 +73,6 @@ def product_update():
     return jsonify(message), 200
 
 
-# ------------------------------------------ Product Rating init
-@app.route('/product-rating', methods=["GET"])
-def product_rating():
-    return jsonify([prod_rat.__dict__() for prod_rat in pr.read()]), 200
-
-@app.route('/product-rating', methods=["POST"])
-def product_rating_create():
-    data = request.get_json()
-    product_rating = ProductRating(**data)
-    model = pr.create(product_rating)
-    return (jsonify(model.__dict__()), 201)
-
-
-@app.route('/product-rating', methods=['PUT'])
-def product_rating_update():
-    data = request.get_json()
-    product_rating = ProductRating(**data)
-    message = pr.update(product_rating)
-    return jsonify(message), 200
-
-@app.route('/product-rating', methods=['DELETE'])
-def product_rating_delete():
-    id = request.args.get('id')
-    message = pr.delete(id)
-    return jsonify(message), 200
-# ------------------------------------------ Product Rating finish
 # ------------------------------------------ Shipping Country init
 @app.route('/shipping-country', methods=["GET"])
 def shipping_country():
