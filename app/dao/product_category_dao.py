@@ -18,7 +18,7 @@ class ProductCategoryDao(BaseDao):
         return self.__convert_data_object(data)
 
     # create
-    def create(self, model: ProductCategory) -> str:
+    def create(self, model: ProductCategory) -> ProductCategory:
         sql_insert = f'''INSERT INTO {self.__table_name}
                     VALUES
                     (
@@ -27,7 +27,8 @@ class ProductCategoryDao(BaseDao):
                         ,'{model.description}'
                     )
                     ;'''
-        return super().insert(sql_insert)
+        model.id = super().insert(sql_insert)
+        return model
 
     # update
     def update(self, model: ProductCategory) -> str:
