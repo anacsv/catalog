@@ -60,8 +60,8 @@ class ProductRatingDao(BaseDao):
                 condition = self.__obj_converter(item)
                 conditions.append(condition)
             return conditions
-        condition = self.__obj_converter(data)
-        return condition
+        conditions = self.__obj_converter(data)
+        return conditions
 
     def __obj_converter(self, item_tuple:tuple) -> ProductRating:
         model = ProductRating()

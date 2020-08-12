@@ -56,10 +56,10 @@ class ShippingCountryDao(BaseDao):
                 condition = self.__obj_converter(item)
                 conditions.append(condition)
             return conditions
-        condition = self.__obj_converter(data)
-        return condition
+        conditions = self.__obj_converter(data)
+        return conditions
 
-    def __obj_converter(self, item_tuple:tuple) -> ShippingCountry:
+    def __obj_converter(self, item_tuple: tuple) -> ShippingCountry:
         model = ShippingCountry()
         model.id = item_tuple[0]
         model.name = item_tuple[1]
