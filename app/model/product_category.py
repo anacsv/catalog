@@ -33,9 +33,16 @@ class ProductCategory(Base, BaseModel):
     def description(self, description: str):
         self.__description = str(description)
 
-    def __dict__(self):
+    def to_dict(self) -> dict:
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description
         }
+
+    # def __dict__(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'description': self.description
+    #     }

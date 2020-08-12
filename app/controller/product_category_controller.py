@@ -12,14 +12,14 @@ class ProductCategoryController(Resource):
 
     def get(self, id: int = None):
         if id:
-            return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([p_category.__dict__() for p_category in self.__dao.read()])
+            return jsonify(self.__dao.read(id).to_dict())
+        return jsonify([p_category.to_dict() for p_category in self.__dao.read()])
 
     def post(self):
         data = request.get_json()
         product_category = ProductCategory(**data)
         model = self.__dao.create(product_category)
-        return jsonify(model.__dict__())
+        return jsonify(model.to_dict())
 
     def put(self, id):
         data = request.get_json()

@@ -6,17 +6,11 @@ class ProductCategoryDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_category'
-        super().__init__()
+        super().__init__(ProductCategory)
 
     # read
     def read(self, id: int = None):
-        return super().read(ProductCategory, id)
-        # sql_select = f'SELECT id, name, description FROM {self.__table_name}'
-        # if id:
-        #     sql_select += f' WHERE id= {id} '
-        #
-        # data = super().read(sql_select)
-        # return self.__convert_data_object(data)
+        return super().read(id)
 
     # create
     def create(self, model: ProductCategory) -> ProductCategory:
@@ -40,7 +34,7 @@ class ProductCategoryDao(BaseDao):
                     WHERE id = {model.id}; '''
         rows = super().update(sql_update)
         if rows:
-            return model.__dict__()
+            return model.to_dict()
         return {'success': False, 'message': "not affected"}
 
     # delete

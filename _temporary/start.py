@@ -6,6 +6,7 @@
 import sqlalchemy as db
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from flask import jsonify
 
 from app.model.base_model import BaseModel
 
@@ -38,6 +39,14 @@ class ProductCategory(Base, BaseModel):
     def description(self, description: str):
         self.__description = str(description)
 
+    @property
+    def __dict__(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description
+        }
+
 
 #==== Usando o orm
 #------ Dados de acesso a base de dados
@@ -60,10 +69,10 @@ session = Session()
 #crud
 #-- lista all
 
-def list(id=None):
+def list(model_class, id=None):
     if id:
-        return session.query(ProductCategory).get(id)
-    return session.query(ProductCategory).all()
+        return session.query(model_class).get(id)
+    return session.query(model_class).all()
 
 def create(model:ProductCategory):
     session.add(model)
@@ -78,10 +87,50 @@ def delete(id:int):
     session.delete(model)
     session.commit()
 
-pc = ProductCategory('transformers Xaomi/Apple','roteadores',11)
+# pc = ProductCategory('transformers Xaomi/Apple','roteadores',11)
 
 # delete(10)
-# list()
+# list(ProductCategory)
 
-for i in list():
+class BaseDao:
+
+    def __init__(self):
+        self.__connector = 'mysql+mysqlconnector'
+        self.__hostname = 'mysql.padawans.dev'
+        self.__username = 'padawans'
+        self.__password = 'OTE2020'
+        self.__database = 'padawans'
+        self.__get_connection()
+
+    def __get_connection(self):
+        engine = db.create_engine(
+            f'{self.__connector}://{self.__username}:{self.__password}@{self.__hostname}/{self.__database}')
+        Session = db.orm.sessionmaker()
+        Session.configure(bind=engine)
+        self.__session = Session()
+
+    #read
+    def read(self, model_class, id: int = None):
+        if id:
+            return self.__session.query(model_class).get(id)
+        return self.__session.query(model_class).all()
+
+
+class ProductCategoryDao(BaseDao):
+
+    def __init__(self):
+        super().__init__()
+
+    # read
+    def read(self, id: int = None):
+        return super().read(ProductCategory, id)
+
+
+# base_dao = BaseDao()
+p_dao = ProductCategoryDao()
+
+
+for i in p_dao.read():
     print(f'{i.id}{i.name}{i.description}')
+
+# print(jsonify([p_category.__dict__() for p_category in p_dao.read()]))
