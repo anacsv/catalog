@@ -28,22 +28,20 @@ class BaseDao:
         return self.__session.query(self.__model_class).all()
 
     #create
-    def insert(self, sql_insert) -> int:
-        self.__cursor.execute(sql_insert)
-        self.__connection.commit()
-        id = self.__cursor.lastrowid
-        return id
+    def insert(self, model):
+        self.__session.add(model)
+        self.__session.commit()
+        return 'salvo'
 
     #update
-    def update(self, sql_update):
-        self.__cursor.execute(sql_update)
-        self.__connection.commit()
-        rows = self.__cursor.rowcount
-        return rows
+    def update(self, model):
+        self.__session.merge(model)
+        self.__session.commit()
+        return 'editado'
 
     #delete
-    def delete(self, sql_delete) -> int:
-        self.__cursor.execute(sql_delete)
-        self.__connection.commit()
-        rows = self.__cursor.rowcount
-        return rows
+    def delete(self, id) -> int:
+        model = self.read(id)
+        self.__session.delete(model)
+        self.__session.commit()
+        return 'deletado'

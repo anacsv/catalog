@@ -39,13 +39,13 @@ class ProductCategory(Base, BaseModel):
     def description(self, description: str):
         self.__description = str(description)
 
-    @property
-    def __dict__(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'description': self.description
-        }
+    # @property
+    # def __dict__(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'description': self.description
+    #     }
 
 
 #==== Usando o orm
@@ -115,6 +115,12 @@ class BaseDao:
             return self.__session.query(model_class).get(id)
         return self.__session.query(model_class).all()
 
+    # create
+    def insert(self, model):
+        self.__session.add(model)
+        self.__session.commit()
+        breakpoint()
+        return ''
 
 class ProductCategoryDao(BaseDao):
 
@@ -125,12 +131,16 @@ class ProductCategoryDao(BaseDao):
     def read(self, id: int = None):
         return super().read(ProductCategory, id)
 
+    def create(self, model):
+        return super().insert(model)
+
 
 # base_dao = BaseDao()
 p_dao = ProductCategoryDao()
 
-
-for i in p_dao.read():
-    print(f'{i.id}{i.name}{i.description}')
+pc = ProductCategory('name', 'descr')
+print(p_dao.create(pc))
+# for i in p_dao.read():
+#     print(f'{i.id}{i.name}{i.description}')
 
 # print(jsonify([p_category.__dict__() for p_category in p_dao.read()]))
