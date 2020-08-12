@@ -31,17 +31,17 @@ class BaseDao:
     def insert(self, model):
         self.__session.add(model)
         self.__session.commit()
-        return 'salvo'
+        return {'message': 'salvo'}
 
     #update
     def update(self, model):
         self.__session.merge(model)
         self.__session.commit()
-        return 'editado'
+        return {'message': 'editado'}
 
     #delete
     def delete(self, id):
         model = self.read(id)
         self.__session.delete(model)
         self.__session.commit()
-        return 'deletado'
+        return {'message': 'deletado'}
