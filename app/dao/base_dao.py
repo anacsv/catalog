@@ -1,22 +1,23 @@
-import mysql.connector as connector
+import sqlalchemy as db
+from sqlalchemy.orm.session import sessionmaker
+from app.model.product_category import ProductCategory
 
 class BaseDao:
 
     def __init__(self):
-        self.__hostname = 'mysql.padawans.dev' 
-        self.__username = 'padawans' 
-        self.__password = 'OTE2020' 
-        self.__database = 'padawans' 
+        self.__connector = 'mysql+mysqlconnector'
+        self.__hostname = 'mysql.padawans.dev'
+        self.__username = 'padawans'
+        self.__password = 'OTE2020'
+        self.__database = 'padawans'
         self.__get_connection()
 
     def __get_connection(self):
-        self.__connection = connector.connect(
-                        host = self.__hostname
-                        ,user = self.__username
-                        ,passwd = self.__password
-                        ,db = self.__database
-                    )   
-        self.__cursor = self.__connection.cursor()    
+        self.__engine = db.create_engine(
+            f'{self.__connector}://{self.__username}:{self.__password}@{self.__hostname}/{self.__database}')
+        Session = db.orm.sessionmaker()
+        Session.configure(bind=self.__engine)
+        self.__session = Session()
 
     # --- CRUD ----------------------
     #read_by_id
@@ -24,7 +25,7 @@ class BaseDao:
         self.__cursor.execute(sql_select)
         result = self.__cursor.fetchone()
         return result
-    
+
     #read_all
     def __read_all(self, sql_select) -> list:
         self.__cursor.execute(sql_select)
@@ -32,10 +33,11 @@ class BaseDao:
         return result
 
     #read
-    def read(self, sql_select: str):
-        if 'where id'.lower() in sql_select.lower():
-            return self.__read_by_id(sql_select)
-        return self.__read_all(sql_select)
+    def read(self, model_class, id: int = None):
+        if id:
+            return self.__session.query(model_class).get(id)
+        breakpoint(self.__session)
+        return self.__session.query(model_class).all()
 
     #create
     def insert(self, sql_insert) -> int:

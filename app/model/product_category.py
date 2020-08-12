@@ -1,7 +1,16 @@
+import sqlalchemy as db
+from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
 from app.model.base_model import BaseModel
 
+Base = declarative_base()
 
-class ProductCategory(BaseModel):
+
+class ProductCategory(Base, BaseModel):
+    __tablename__ = 'product_category'
+    __name = db.Column('name', db.String(length=64))
+    __description = db.Column('description', db.String())
 
     def __init__(self, name: str = "", description: str = "", id: int = 0):
         self.__name = name

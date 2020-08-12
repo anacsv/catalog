@@ -80,7 +80,8 @@ def delete(id:int):
 
 pc = ProductCategory('transformers Xaomi/Apple','roteadores',11)
 
-delete(10)
+# delete(10)
+# list()
 
 for i in list():
     print(f'{i.id}{i.name}{i.description}')
