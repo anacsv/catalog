@@ -1,4 +1,8 @@
+import sqlalchemy as db
+
 class BaseModel:
+    __id = db.Column('id', db.Integer, primary_key=True)
+
     def __init__(self, id: int = 0):
         self.__id = id
 
