@@ -14,16 +14,7 @@ class ProductCategoryDao(BaseDao):
 
     # create
     def create(self, model: ProductCategory) -> ProductCategory:
-        sql_insert = f'''INSERT INTO {self.__table_name}
-                    VALUES
-                    (
-                        0
-                        ,'{model.name}'
-                        ,'{model.description}'
-                    )
-                    ;'''
-        model.id = super().insert(sql_insert)
-        return model
+        return super().insert(model)
 
     # update
     def update(self, model: ProductCategory) -> dict:

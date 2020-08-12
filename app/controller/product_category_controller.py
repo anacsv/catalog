@@ -18,8 +18,8 @@ class ProductCategoryController(Resource):
     def post(self):
         data = request.get_json()
         product_category = ProductCategory(**data)
-        model = self.__dao.create(product_category)
-        return jsonify(model.__dict__())
+        message = self.__dao.create(product_category)
+        return jsonify(message)
 
     def put(self, id):
         data = request.get_json()
