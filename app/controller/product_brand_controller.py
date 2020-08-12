@@ -12,7 +12,7 @@ class ProductBrandController(Resource):
     def get(self,id=None):
         if id:
             return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([p_brand.__dict__() for p_brand in self.__dao.read(id)])
+        return jsonify([p_brand.__dict__() for p_brand in self.__dao.read()])
 
     def post(self):
         data = request.get_json()

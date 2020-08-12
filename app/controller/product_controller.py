@@ -11,7 +11,7 @@ class ProductController(Resource):
 
     def get(self,id=None):
         if id:
-            return jsonify(self.__dao.read().__dict__())
+            return jsonify(self.__dao.read(id).__dict__())
         return jsonify([p.__dict__() for p in self.__dao.read()])
 
     def post(self):
