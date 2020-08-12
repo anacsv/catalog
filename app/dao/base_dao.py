@@ -1,59 +1,47 @@
-import mysql.connector as connector
+import sqlalchemy as db
+from sqlalchemy.orm.session import sessionmaker
 
 class BaseDao:
 
-    def __init__(self):
-        self.__hostname = 'mysql.padawans.dev' 
-        self.__username = 'padawans' 
-        self.__password = 'OTE2020' 
-        self.__database = 'padawans' 
+    def __init__(self, model_class):
+        self.__connector = 'mysql+mysqlconnector'
+        self.__hostname = 'mysql.padawans.dev'
+        self.__username = 'padawans'
+        self.__password = 'OTE2020'
+        self.__database = 'padawans'
         self.__get_connection()
+        self.__model_class = model_class
 
     def __get_connection(self):
-        self.__connection = connector.connect(
-                        host = self.__hostname
-                        ,user = self.__username
-                        ,passwd = self.__password
-                        ,db = self.__database
-                    )   
-        self.__cursor = self.__connection.cursor()    
+        engine = db.create_engine(
+            f'{self.__connector}://{self.__username}:{self.__password}@{self.__hostname}/{self.__database}')
+        Session = db.orm.sessionmaker()
+        Session.configure(bind=engine)
+        self.__session = Session()
 
     # --- CRUD ----------------------
-    #read_by_id
-    def __read_by_id(self, sql_select):
-        self.__cursor.execute(sql_select)
-        result = self.__cursor.fetchone()
-        return result
-    
-    #read_all
-    def __read_all(self, sql_select) -> list:
-        self.__cursor.execute(sql_select)
-        result = self.__cursor.fetchall()
-        return result
 
-    #read
-    def read(self, sql_select: str):
-        if 'where id'.lower() in sql_select.lower():
-            return self.__read_by_id(sql_select)
-        return self.__read_all(sql_select)
+    # read
+    def read(self, id: int = None):
+        if id:
+            return self.__session.query(self.__model_class).get(id)
+        return self.__session.query(self.__model_class).all()
 
     #create
-    def insert(self, sql_insert) -> int:
-        self.__cursor.execute(sql_insert)
-        self.__connection.commit()
-        id = self.__cursor.lastrowid
-        return id
+    def insert(self, model):
+        self.__session.add(model)
+        self.__session.commit()
+        return 'salvo'
 
     #update
-    def update(self, sql_update):
-        self.__cursor.execute(sql_update)
-        self.__connection.commit()
-        rows = self.__cursor.rowcount
-        return rows
+    def update(self, model):
+        self.__session.merge(model)
+        self.__session.commit()
+        return 'editado'
 
     #delete
-    def delete(self, sql_delete) -> int:
-        self.__cursor.execute(sql_delete)
-        self.__connection.commit()
-        rows = self.__cursor.rowcount
-        return rows
+    def delete(self, id):
+        model = self.read(id)
+        self.__session.delete(model)
+        self.__session.commit()
+        return 'deletado'
