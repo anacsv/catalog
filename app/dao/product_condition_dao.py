@@ -6,16 +6,11 @@ class ProductConditionDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_condition'
-        super().__init__()
+        super().__init__(ProductCondition)
 
     # read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, description FROM {self.__table_name}'
-        if id:
-            sql_select += f' WHERE id= {id} '
-
-        data = super().read(sql_select)
-        return self.__convert_data_object(data)
+        return super().read(id)
 
     # create
     def create(self, model: ProductCondition) -> ProductCondition:

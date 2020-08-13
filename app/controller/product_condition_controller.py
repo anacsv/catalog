@@ -12,14 +12,14 @@ class ProductConditionController(Resource):
 
     def get(self, id: int = None):
         if id:
-            return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([p_condition.__dict__() for p_condition in self.__dao.read()])
+            return jsonify(self.__dao.read(id).to_dict())
+        return jsonify([p_condition.to_dict() for p_condition in self.__dao.read()])
 
     def post(self):
         data = request.get_json()
         product_condition = ProductCondition(**data)
         model = self.__dao.create(product_condition)
-        return jsonify(model.__dict__())
+        return jsonify(model.to_dict())
 
     def put(self, id):
         data = request.get_json()
