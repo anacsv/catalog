@@ -1,11 +1,18 @@
 from app.model.base_model import BaseModel
+import sqlalchemy as db
+from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
-class Product(BaseModel):
+class Product(Base, BaseModel):
+
+    __tablename__ = 'product'
+    __name = db.Column('name', db.String(length=64))
+    __description = db.Column('description', db.String())
 
     def __init__(self, name: str = '', price: float = 0.0,
                  description: str = '', gtin='', product_condition_id=0,
-                 brand_id=0, shipping_country_id=0, id: int = 0):
+                 brand_id=0, shipping_country_id=0):
         self.__name = name
         self.__price = price
         self.__description = description
@@ -13,7 +20,6 @@ class Product(BaseModel):
         self.__brand_id = brand_id
         self.__product_condition_id = product_condition_id
         self.__shipping_country_id = shipping_country_id
-        super().__init__(id)
 
     @property
     def name(self) -> str:
@@ -74,7 +80,7 @@ class Product(BaseModel):
     def __str__(self):
         return f'{self.id};{self.name};{self.price};{self.description};{self.gtin};{self.brand_id}; {self.product_condition_id}; {self.shipping_country_id}'
 
-    def __dict__(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
