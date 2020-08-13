@@ -25,8 +25,8 @@ class ShippingCountryController(Resource):
         data = request.get_json()
         shipping_country = ShippingCountry(**data)
         shipping_country.id = id
-        message = self.__dao.update(shipping_country)
-        return jsonify(message)
+        model = self.__dao.update(shipping_country)
+        return jsonify(model.to_dict())
 
 
     def delete(self, id):

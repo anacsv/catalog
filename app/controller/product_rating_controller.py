@@ -25,8 +25,8 @@ class ProductRatingController(Resource):
         data = request.get_json()
         product_rating = ProductRating(**data)
         product_rating.id = id
-        message = self.__dao.update(product_rating)
-        return jsonify(message)
+        model = self.__dao.update(product_rating)
+        return jsonify(model.to_dict())
 
 
     def delete(self, id):
