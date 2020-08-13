@@ -5,16 +5,11 @@ class ProductRatingDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_rating'
-        super().__init__()
+        super().__init__(ProductRating)
 
     #read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, score, status, person_id, product_id FROM {self.__table_name}'
-        if id:
-            sql_select += f' WHERE id= {id} '
-
-        data = super().read(sql_select)
-        return self.__convert_data_object(data)
+        return super().read(id)
 
     #create
     def create(self, model: ProductRating) -> ProductRating:

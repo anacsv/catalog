@@ -1,6 +1,17 @@
+import sqlalchemy as db
+from sqlalchemy.ext.declarative import declarative_base
+
 from app.model.base_model import BaseModel
 
-class ProductRating(BaseModel):
+Base = declarative_base()
+
+class ProductRating(Base, BaseModel):
+
+    __tablename__ = 'product_rating'
+    __score = db.Column('score', db.String(length=64))
+    __status = db.Column('status', db.String(length=64))
+    __person_id = db.Column('person_id', db.Integer())
+    __product_id = db.Column('product_id', db.Integer())
 
     def __init__(self, score: str = '', status: str = '', person_id: int = 0, product_id: int = 0, id: int = 0):
         self.__score = str(score)
@@ -43,8 +54,8 @@ class ProductRating(BaseModel):
     
     def __str__(self):
         return f'{self.id};{self.score};{self.status};{self.person_id};{self.product_id}'
-    
-    def __dict__(self):
+
+    def to_dict(self):
         return {
                 'id':self.id,
                 'score':self.score,
@@ -52,3 +63,12 @@ class ProductRating(BaseModel):
                 'person_id':self.person_id,
                 'product_id':self.product_id
         }
+    
+    # def __dict__(self):
+    #     return {
+    #             'id':self.id,
+    #             'score':self.score,
+    #             'status':self.status,
+    #             'person_id':self.person_id,
+    #             'product_id':self.product_id
+    #     }
