@@ -1,10 +1,17 @@
 from app.model.base_model import BaseModel
+import sqlalchemy as db
+from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
-class ProductBrand(BaseModel):
+class ProductBrand(Base, BaseModel):
+
+    __tablename__ = 'product_brand'
+    __name = db.Column('name', db.String(length=64))
+    __full_name = db.Column('full_name', db.String())
 
     def __init__(self, name: str = '',
-                 full_name: str = '', id:int = 0):
+                 full_name: str = ''):
         self.__name = name
         self.__full_name = full_name
         super().__init__(id)
@@ -28,7 +35,7 @@ class ProductBrand(BaseModel):
     def __str__(self):
         return f'{self.id};{self.name};{self.full_name}'
 
-    def __dict__(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
