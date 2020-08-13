@@ -10,7 +10,10 @@ class Product(Base, BaseModel):
     __name = db.Column('name', db.String(length=64))
     __price = db.Column('price', db.Float)
     __description = db.Column('description', db.String())
-    __gtin = db.Column('gtin', db.Integer)
+    __gtin = db.Column('gtin', db.String)
+    __brand_id = db.Column('brand_id', db.Integer)
+    __product_condition_id = db.Column('product_condition_id', db.Integer)
+    __shipping_country_id = db.Column('shipping_country_id', db.Integer)
 
     def __init__(self, name: str = '', price: float = 0.0,
                  description: str = '', gtin='', product_condition_id=0,
@@ -56,27 +59,27 @@ class Product(Base, BaseModel):
         self.__gtin = str(gtin)
 
     @property
-    def brand_id(self) -> str:
+    def brand_id(self) -> int:
         return self.__brand_id
 
     @brand_id.setter
-    def brand_id(self, brand_id: str) -> None:
+    def brand_id(self, brand_id: int) -> None:
         self.__brand_id = int(brand_id)
 
     @property
-    def product_condition_id(self) -> str:
+    def product_condition_id(self) -> int:
         return self.__product_condition_id
 
     @product_condition_id.setter
-    def product_condition_id(self, product_condition_id: str) -> None:
+    def product_condition_id(self, product_condition_id: int) -> None:
         self.__product_condition_id = int(product_condition_id)
 
     @property
-    def shipping_country_id(self) -> str:
+    def shipping_country_id(self) -> int:
         return self.__shipping_country_id
 
     @shipping_country_id.setter
-    def shipping_country_id(self, shipping_country_id: str) -> None:
+    def shipping_country_id(self, shipping_country_id: int) -> None:
         self.__shipping_country_id = int(shipping_country_id)
 
     def __str__(self):
