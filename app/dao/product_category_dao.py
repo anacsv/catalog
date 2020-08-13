@@ -22,11 +22,7 @@ class ProductCategoryDao(BaseDao):
 
     # delete
     def delete(self, id: int) -> dict:
-        sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
-        rows = super().delete(sql_delete)
-        if rows:
-            return {'success': True, 'message': "deleted"}
-        return {'success': False, 'message': "not found"}
+        return super().delete(id)
 
     def __convert_data_object(self, data):
         if type(data) == list:
