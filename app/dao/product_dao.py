@@ -5,59 +5,24 @@ class ProductDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product'
-        super().__init__()
+        super().__init__(Product)
 
     # read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, description, price, gtin, product_condition_id, brand_id, shipping_country_id FROM {self.__table_name}'
-        if id:
-            sql_select += f' WHERE id= {id} '
-
-        data = super().read(sql_select)
-        return self.__convert_data_object(data)
+        return super().read(id)
 
     # create
-    def create(self, model: Product) -> str:
-        sql_insert = f'''INSERT INTO {self.__table_name}
-                    VALUES
-                    (
-                        0
-                        ,'{model.name}'
-                        ,'{model.description}'
-                        ,'{model.price}'
-                        ,'{model.gtin}'
-                        ,'{model.product_condition_id}'
-                        ,'{model.brand_id}'
-                        ,'{model.shipping_country_id}'
-                    )
-                    ;'''
-        model.id = super().insert(sql_insert)
-        return model
+    def create(self, model: Product) -> Product:
+         model.id = super().insert(model)
+         return model
 
     # update    
-    def update(self, model: Product) -> str:
-        sql_update = f'''UPDATE {self.__table_name} 
-                    SET
-                    name = '{model.name}'
-                    ,description = '{model.description}'
-                    ,price = '{model.price}'
-                    ,gtin = '{model.gtin}'
-                    ,product_condition_id = '{model.product_condition_id}'
-                    ,brand_id = '{model.brand_id}'
-                    ,shipping_country_id = '{model.shipping_country_id}'
-                    WHERE id = {model.id}; '''
-        rows = super().update(sql_update)
-        if rows:
-            return model.__dict__()
-        return {'success': False, 'message': "not affected"}
+    def update(self, model: Product) -> Product:
+        return super().update(model)
 
     # delete
-    def delete(self, id: int) -> str:
-        sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
-        rows = super().delete(sql_delete)
-        if rows:
-            return {'success': True, 'message': "deleted"}
-        return {'success': False, 'message': "not found"}
+    def delete(self, id: int) -> dict:
+        return super().delete(id)
 
     def __convert_data_object(self, data):
         if type(data) == list:

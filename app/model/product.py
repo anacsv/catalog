@@ -1,11 +1,23 @@
 from app.model.base_model import BaseModel
+import sqlalchemy as db
+from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
-class Product(BaseModel):
+class Product(Base, BaseModel):
+
+    __tablename__ = 'product'
+    __name = db.Column('name', db.String(length=64))
+    __price = db.Column('price', db.Float)
+    __description = db.Column('description', db.String())
+    __gtin = db.Column('gtin', db.String)
+    __brand_id = db.Column('brand_id', db.Integer)
+    __product_condition_id = db.Column('product_condition_id', db.Integer)
+    __shipping_country_id = db.Column('shipping_country_id', db.Integer)
 
     def __init__(self, name: str = '', price: float = 0.0,
                  description: str = '', gtin='', product_condition_id=0,
-                 brand_id=0, shipping_country_id=0, id: int = 0):
+                 brand_id=0, shipping_country_id=0):
         self.__name = name
         self.__price = price
         self.__description = description
@@ -13,7 +25,6 @@ class Product(BaseModel):
         self.__brand_id = brand_id
         self.__product_condition_id = product_condition_id
         self.__shipping_country_id = shipping_country_id
-        super().__init__(id)
 
     @property
     def name(self) -> str:
@@ -48,33 +59,33 @@ class Product(BaseModel):
         self.__gtin = str(gtin)
 
     @property
-    def brand_id(self) -> str:
+    def brand_id(self) -> int:
         return self.__brand_id
 
     @brand_id.setter
-    def brand_id(self, brand_id: str) -> None:
+    def brand_id(self, brand_id: int) -> None:
         self.__brand_id = int(brand_id)
 
     @property
-    def product_condition_id(self) -> str:
+    def product_condition_id(self) -> int:
         return self.__product_condition_id
 
     @product_condition_id.setter
-    def product_condition_id(self, product_condition_id: str) -> None:
+    def product_condition_id(self, product_condition_id: int) -> None:
         self.__product_condition_id = int(product_condition_id)
 
     @property
-    def shipping_country_id(self) -> str:
+    def shipping_country_id(self) -> int:
         return self.__shipping_country_id
 
     @shipping_country_id.setter
-    def shipping_country_id(self, shipping_country_id: str) -> None:
+    def shipping_country_id(self, shipping_country_id: int) -> None:
         self.__shipping_country_id = int(shipping_country_id)
 
     def __str__(self):
         return f'{self.id};{self.name};{self.price};{self.description};{self.gtin};{self.brand_id}; {self.product_condition_id}; {self.shipping_country_id}'
 
-    def __dict__(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,

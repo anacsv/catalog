@@ -11,21 +11,21 @@ class ProductController(Resource):
 
     def get(self,id=None):
         if id:
-            return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([p.__dict__() for p in self.__dao.read()])
+            return jsonify(self.__dao.read(id).to_dict())
+        return jsonify([p.to_dict() for p in self.__dao.read()])
 
     def post(self):
         data = request.get_json()
         product = Product(**data)
         model = self.__dao.create(product)
-        return (jsonify(model.__dict__()))
+        return jsonify(model.to_dict())
 
     def put(self, id):
         data = request.get_json()
         product = Product(**data)
         product.id = id
-        message = self.__dao.update(product)
-        return jsonify(message)
+        model = self.__dao.update(product)
+        return jsonify(model.to_dict())
 
     def delete(self, id):
         message = self.__dao.delete(id)
