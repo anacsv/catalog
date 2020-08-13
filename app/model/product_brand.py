@@ -14,7 +14,6 @@ class ProductBrand(Base, BaseModel):
                  full_name: str = ''):
         self.__name = name
         self.__full_name = full_name
-        super().__init__(id)
 
     @property
     def name(self) -> str:

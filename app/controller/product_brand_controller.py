@@ -25,7 +25,7 @@ class ProductBrandController(Resource):
         product_brand = ProductBrand(**data)
         product_brand.id = id
         model = self.__dao.update(product_brand)
-        return jsonify(model.to_dict)
+        return jsonify(model.to_dict())
 
     def delete(self, id):
         message = self.__dao.delete(id)
