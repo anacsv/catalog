@@ -18,7 +18,7 @@ class ProductRatingDao(BaseDao):
 
     #update
     def update(self, model: ProductRating) -> ProductRating:
-        model.id =super().update(model)
+        model =super().update(model)
         return model
 
     #delete

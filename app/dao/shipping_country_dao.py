@@ -18,7 +18,7 @@ class ShippingCountryDao(BaseDao):
 
     #update
     def update(self, model: ShippingCountry) -> ShippingCountry:
-        model.id = super().update(model)
+        model = super().update(model)
         return model
 
     #delete

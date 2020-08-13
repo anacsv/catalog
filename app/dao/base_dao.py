@@ -37,7 +37,7 @@ class BaseDao:
     def update(self, model):
         self.__session.merge(model)
         self.__session.commit()
-        return model.id
+        return model
 
     #delete
     def delete(self, id):
