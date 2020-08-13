@@ -10,15 +10,14 @@ class ProductRating(Base, BaseModel):
     __tablename__ = 'product_rating'
     __score = db.Column('score', db.String(length=64))
     __status = db.Column('status', db.String(length=64))
-    __person_id = db.Column('person_id', db.Integer())
-    __product_id = db.Column('product_id', db.Integer())
+    __person_id = db.Column('person_id', db.Integer)
+    __product_id = db.Column('product_id', db.Integer)
 
-    def __init__(self, score: str = '', status: str = '', person_id: int = 0, product_id: int = 0, id: int = 0):
+    def __init__(self, score: str = '', status: str = '', person_id: int = 0, product_id: int = 0):
         self.__score = str(score)
         self.__status = str(status)
         self.__person_id = int(person_id)
         self.__product_id = int(product_id)
-        super().__init__(id=id)
 
     @property
     def score(self) -> str:
@@ -55,6 +54,7 @@ class ProductRating(Base, BaseModel):
     def __str__(self):
         return f'{self.id};{self.score};{self.status};{self.person_id};{self.product_id}'
 
+    @property
     def to_dict(self):
         return {
                 'id':self.id,

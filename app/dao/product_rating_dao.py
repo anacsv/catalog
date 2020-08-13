@@ -22,22 +22,3 @@ class ProductRatingDao(BaseDao):
     #delete
     def delete(self, id:int)->dict:
         return super().delete(id)
-
-    def __convert_data_object(self, data):
-        if type(data) == list:
-            conditions = []
-            for item in data:
-                condition = self.__obj_converter(item)
-                conditions.append(condition)
-            return conditions
-        conditions = self.__obj_converter(data)
-        return conditions
-
-    def __obj_converter(self, item_tuple:tuple) -> ProductRating:
-        model = ProductRating()
-        model.id = item_tuple[0]
-        model.score = item_tuple[1]
-        model.status = item_tuple[2]
-        model.person_id = item_tuple[3]
-        model.product_id = item_tuple[4]
-        return model

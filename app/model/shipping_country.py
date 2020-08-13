@@ -1,11 +1,19 @@
+import sqlalchemy as db
+from sqlalchemy.ext.declarative import declarative_base
+
 from app.model.base_model import BaseModel
 
-class ShippingCountry(BaseModel):
+Base = declarative_base()
 
-    def __init__(self, name: str = '', imported: bool = 0, id: int = 0):
+class ShippingCountry(Base, BaseModel):
+
+    __tablename__ = 'shipping_country'
+    __name = db.Column('name', db.String(length=64))
+    __imported = db.Column('imported', db.Boolean())
+
+    def __init__(self, name: str = '', imported: bool = 0):
         self.__name = str(name)
         self.__imported = bool(imported)
-        super().__init__(id=id)
 
     @property
     def name(self) -> str:
@@ -26,9 +34,16 @@ class ShippingCountry(BaseModel):
     def __str__(self):
         return f'{self.id};{self.name};{self.imported}'
 
-    def __dict__(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
             'imported': self.imported
         }
+
+    # def __dict__(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'imported': self.imported
+    #     }
