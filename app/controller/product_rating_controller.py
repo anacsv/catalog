@@ -10,23 +10,23 @@ class ProductRatingController(Resource):
 
     def get(self, id=None):
         if id:
-            return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([prod_rat.__dict__() for prod_rat in self.__dao.read()])
+            return jsonify(self.__dao.read(id).to_dict())
+        return jsonify([prod_rat.to_dict() for prod_rat in self.__dao.read()])
 
 
     def post(self):
         data = request.get_json()
         product_rating = ProductRating(**data)
         model = self.__dao.create(product_rating)
-        return jsonify(model.__dict__())
+        return jsonify(model.to_dict())
 
 
     def put(self, id):
         data = request.get_json()
         product_rating = ProductRating(**data)
         product_rating.id = id
-        message = self.__dao.update(product_rating)
-        return jsonify(message)
+        model = self.__dao.update(product_rating)
+        return jsonify(model.to_dict())
 
 
     def delete(self, id):
