@@ -14,15 +14,7 @@ class ProductConditionDao(BaseDao):
 
     # create
     def create(self, model: ProductCondition) -> ProductCondition:
-        sql_insert = f'''INSERT INTO {self.__table_name}
-                    VALUES
-                    (
-                        0
-                        ,'{model.name}'
-                        ,'{model.description}'
-                    )
-                    ;'''
-        model.id = super().insert(sql_insert)
+        model.id = super().insert(model)
         return model
 
     # update
