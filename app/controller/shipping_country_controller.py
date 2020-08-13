@@ -10,23 +10,23 @@ class ShippingCountryController(Resource):
 
     def get(self, id=None):
         if id:
-            return jsonify(self.__dao.read(id).__dict__())
-        return jsonify([ship_count.__dict__() for ship_count in self.__dao.read()])
+            return jsonify(self.__dao.read(id).to_dict())
+        return jsonify([ship_count.to_dict() for ship_count in self.__dao.read()])
 
 
     def post(self):
         data = request.get_json()
         shipping_country = ShippingCountry(**data)
         model = self.__dao.create(shipping_country)
-        return jsonify(model.__dict__())
+        return jsonify(model.to_dict())
 
 
     def put(self, id):
         data = request.get_json()
         shipping_country = ShippingCountry(**data)
         shipping_country.id = id
-        message = self.__dao.update(shipping_country)
-        return jsonify(message)
+        model = self.__dao.update(shipping_country)
+        return jsonify(model.to_dict())
 
 
     def delete(self, id):

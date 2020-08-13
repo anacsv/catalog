@@ -6,49 +6,24 @@ class ProductConditionDao(BaseDao):
 
     def __init__(self):
         self.__table_name = 'product_condition'
-        super().__init__()
+        super().__init__(ProductCondition)
 
     # read
     def read(self, id: int = None):
-        sql_select = f'SELECT id, name, description FROM {self.__table_name}'
-        if id:
-            sql_select += f' WHERE id= {id} '
-
-        data = super().read(sql_select)
-        return self.__convert_data_object(data)
+        return super().read(id)
 
     # create
     def create(self, model: ProductCondition) -> ProductCondition:
-        sql_insert = f'''INSERT INTO {self.__table_name}
-                    VALUES
-                    (
-                        0
-                        ,'{model.name}'
-                        ,'{model.description}'
-                    )
-                    ;'''
-        model.id = super().insert(sql_insert)
+        model.id = super().insert(model)
         return model
 
     # update
-    def update(self, model: ProductCondition) -> dict:
-        sql_update = f'''UPDATE {self.__table_name} 
-                    SET
-                    name = '{model.name}'
-                    ,description = '{model.description}'
-                    WHERE id = {model.id}; '''
-        rows = super().update(sql_update)
-        if rows:
-            return model.__dict__()
-        return {'success': False, 'message': "not affected"}
+    def update(self, model: ProductCondition) -> ProductCondition:
+        return super().update(model)
 
     # delete
     def delete(self, id: int) -> dict:
-        sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
-        rows = super().delete(sql_delete)
-        if rows:
-            return {'success': True, 'message': "deleted"}
-        return {'success': False, 'message': "not found"}
+        return super().delete(id)
 
     def __convert_data_object(self, data):
         if type(data) == list:
