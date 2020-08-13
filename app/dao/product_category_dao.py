@@ -18,7 +18,7 @@ class ProductCategoryDao(BaseDao):
         return model
 
     # update
-    def update(self, model: ProductCategory) -> dict:
+    def update(self, model: ProductCategory) -> ProductCategory:
         return super().update(model)
 
     # delete

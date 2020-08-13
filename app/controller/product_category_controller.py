@@ -25,8 +25,8 @@ class ProductCategoryController(Resource):
         data = request.get_json()
         product_category = ProductCategory(**data)
         product_category.id = id
-        message = self.__dao.update(product_category)
-        return jsonify(message)
+        model = self.__dao.update(product_category)
+        return jsonify(model.to_dict())
 
     def delete(self, id):
         message = self.__dao.delete(id)
