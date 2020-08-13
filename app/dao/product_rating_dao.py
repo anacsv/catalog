@@ -13,40 +13,15 @@ class ProductRatingDao(BaseDao):
 
     #create
     def create(self, model: ProductRating) -> ProductRating:
-        sql_insert = f'''INSERT INTO {self.__table_name}
-                    VALUES
-                    (
-                        0
-                        ,'{model.score}'
-                        ,'{model.status}'
-                        ,'{model.person_id}'
-                        ,'{model.product_id}'
-                    )
-                    ;'''
-        model.id = super().insert(sql_insert)
-        return model
+        return super().insert(model)
 
     #update
     def update(self, model: ProductRating) -> ProductRating:
-        sql_update = f'''UPDATE {self.__table_name} 
-                    SET
-                    score = '{model.score}'
-                    , status = '{model.status}'
-                    , person_id = '{model.person_id}'
-                    , product_id = '{model.product_id}'
-                    WHERE id = {model.id}; '''
-        rows = super().update(sql_update)
-        if rows:
-            return model.__dict__()
-        return {'success': False, 'message': "not affected"}
+        return super().update(model)
 
     #delete
     def delete(self, id:int)->dict:
-        sql_delete = f'DELETE FROM {self.__table_name} WHERE id = {id}'
-        rows = super().delete(sql_delete)
-        if rows:
-            return {'success': True, 'message': "product_rating deleted"}
-        return {'success': False, 'message': "not found"}
+        return super().delete(id)
 
     def __convert_data_object(self, data):
         if type(data) == list:
