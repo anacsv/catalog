@@ -13,7 +13,8 @@ class ProductRatingDao(BaseDao):
 
     #create
     def create(self, model: ProductRating) -> ProductRating:
-        return super().insert(model)
+        model.id = super().insert(model)
+        return model
 
     #update
     def update(self, model: ProductRating) -> ProductRating:

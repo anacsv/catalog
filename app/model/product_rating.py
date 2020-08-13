@@ -54,7 +54,6 @@ class ProductRating(Base, BaseModel):
     def __str__(self):
         return f'{self.id};{self.score};{self.status};{self.person_id};{self.product_id}'
 
-    @property
     def to_dict(self):
         return {
                 'id':self.id,

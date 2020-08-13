@@ -11,14 +11,14 @@ class ProductRatingController(Resource):
     def get(self, id=None):
         if id:
             return jsonify(self.__dao.read(id).to_dict())
-        return jsonify([prod_rat.to_dict for prod_rat in self.__dao.read()])
+        return jsonify([prod_rat.to_dict() for prod_rat in self.__dao.read()])
 
 
     def post(self):
         data = request.get_json()
         product_rating = ProductRating(**data)
         model = self.__dao.create(product_rating)
-        return model
+        return jsonify(model.to_dict())
 
 
     def put(self, id):
