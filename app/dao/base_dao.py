@@ -27,19 +27,19 @@ class BaseDao:
             return self.__session.query(self.__model_class).get(id)
         return self.__session.query(self.__model_class).all()
 
-    #create
+    # create
     def insert(self, model):
         self.__session.add(model)
         self.__session.commit()
         return {'message': 'salvo'}
 
-    #update
+    # update
     def update(self, model):
         self.__session.merge(model)
         self.__session.commit()
         return {'message': 'editado'}
 
-    #delete
+    # delete
     def delete(self, id):
         model = self.read(id)
         self.__session.delete(model)
