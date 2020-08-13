@@ -8,7 +8,9 @@ class Product(Base, BaseModel):
 
     __tablename__ = 'product'
     __name = db.Column('name', db.String(length=64))
+    __price = db.Column('price', db.Float)
     __description = db.Column('description', db.String())
+    __gtin = db.Column('gtin', db.Integer)
 
     def __init__(self, name: str = '', price: float = 0.0,
                  description: str = '', gtin='', product_condition_id=0,
