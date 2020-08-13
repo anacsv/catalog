@@ -12,10 +12,9 @@ class ProductCategory(Base, BaseModel):
     __name = db.Column('name', db.String(length=64))
     __description = db.Column('description', db.String())
 
-    def __init__(self, name: str = "", description: str = "", id: int = 0):
+    def __init__(self, name: str = "", description: str = ""):
         self.__name = name
         self.__description = description
-        super().__init__(id=id)
 
     @property
     def name(self) -> str:

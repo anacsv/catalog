@@ -14,7 +14,8 @@ class ProductCategoryDao(BaseDao):
 
     # create
     def create(self, model: ProductCategory) -> ProductCategory:
-        return super().insert(model)
+        model.id = super().insert(model)
+        return model
 
     # update
     def update(self, model: ProductCategory) -> dict:

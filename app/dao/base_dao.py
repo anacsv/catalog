@@ -31,7 +31,7 @@ class BaseDao:
     def insert(self, model):
         self.__session.add(model)
         self.__session.commit()
-        return {'message': 'salvo'}
+        return model.id
 
     # update
     def update(self, model):
