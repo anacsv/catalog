@@ -44,4 +44,4 @@ class BaseDao:
         model = self.read(id)
         self.__session.delete(model)
         self.__session.commit()
-        return {'message': 'deletado'}
+        return {'success': True}
