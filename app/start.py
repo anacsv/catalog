@@ -40,10 +40,16 @@ api.add_resource(ShippingCountryController, '/api/shipping-country/<int:id>', en
 # ------------------------------------------ Shipping Country finish
 
 
-api.add_resource(ProductCategoryController, '/api/product-category/', endpoint='product-categories')
-api.add_resource(ProductCategoryController, '/api/product-category/<int:id>/', endpoint='product-category')
+api.add_resource(
+    ProductCategoryController,
+    '/api/product-category/', '/api/product-category/<int:id>',
+    endpoint='product-categories'
+)
 
-api.add_resource(ProductConditionController, '/api/product-condition/', endpoint='product-conditions')
-api.add_resource(ProductConditionController, '/api/product-condition/<int:id>/', endpoint='product-condition')
+api.add_resource(
+    ProductConditionController,
+    '/api/product-condition/', '/api/product-condition/<int:id>',
+    endpoint='product-conditions'
+)
 
 app.run(debug=True)
