@@ -29,14 +29,12 @@ api.add_resource(ProductBrandController, '/api/product-brand/', '/api/product-br
 # ------------------------------------------ Product Brand finish
 
 # ------------------------------------------ Product Rating init
-api.add_resource(ProductRatingController, '/api/product-rating/', endpoint='product-ratings')
-api.add_resource(ProductRatingController, '/api/product-rating/<int:id>', endpoint='product-rating')
+api.add_resource(ProductRatingController, '/api/product-rating/', '/api/product-rating/<int:id>', endpoint='product-ratings')
 # ------------------------------------------ Product Rating finish
 
 
 # ------------------------------------------ Shipping Country init
-api.add_resource(ShippingCountryController, '/api/shipping-country/', endpoint='shipping-countries')
-api.add_resource(ShippingCountryController, '/api/shipping-country/<int:id>', endpoint='shipping-country')
+api.add_resource(ShippingCountryController, '/api/shipping-country/', '/api/shipping-country/<int:id>', endpoint='shipping-countries')
 # ------------------------------------------ Shipping Country finish
 
 
