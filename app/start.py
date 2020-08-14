@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_restful import Api
-
+from flask_cors import CORS
 
 from app.controller.product_controller import ProductController
 from app.controller.product_brand_controller import ProductBrandController
@@ -13,6 +13,7 @@ from app.controller.shipping_country_controller import ShippingCountryController
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app)
 
 @app.route('/')
 def initial():
@@ -24,8 +25,7 @@ api.add_resource(ProductController, '/api/product/<int:id>', endpoint='product')
 # ------------------------------------------ Product finish
 
 # ------------------------------------------ Product Brand
-api.add_resource(ProductBrandController, '/api/product-brand/', endpoint='product-brands')
-api.add_resource(ProductBrandController, '/api/product-brand/<int:id>', endpoint='product-brand')
+api.add_resource(ProductBrandController, '/api/product-brand/', '/api/product-brand/<int:id>', endpoint='product-brands')
 # ------------------------------------------ Product Brand finish
 
 # ------------------------------------------ Product Rating init
