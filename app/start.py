@@ -20,8 +20,7 @@ def initial():
     return ' '
 
 # ------------------------------------------ Product
-api.add_resource(ProductController, '/api/product/', endpoint='products')
-api.add_resource(ProductController, '/api/product/<int:id>', endpoint='product')
+api.add_resource(ProductController, '/api/product/', '/api/product/<int:id>', endpoint='products')
 # ------------------------------------------ Product finish
 
 # ------------------------------------------ Product Brand
