@@ -24,20 +24,3 @@ class ProductConditionDao(BaseDao):
     # delete
     def delete(self, id: int) -> dict:
         return super().delete(id)
-
-    def __convert_data_object(self, data):
-        if type(data) == list:
-            conditions = []
-            for item in data:
-                condition = self.__obj_converter(item)
-                conditions.append(condition)
-            return conditions
-        condition = self.__obj_converter(data)
-        return condition
-
-    def __obj_converter(self, item_tuple: tuple) -> ProductCondition:
-        model = ProductCondition()
-        model.id = item_tuple[0]
-        model.name = item_tuple[1]
-        model.description = item_tuple[2]
-        return model
